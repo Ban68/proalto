@@ -23,7 +23,7 @@ export function Footer() {
                         </ul>
                     </div>
 
-                    <div id="contactanos">
+                    <div id="contacto">
                         <h4 className="font-semibold text-lg mb-4">Contacto</h4>
                         <ul className="space-y-3">
                             <li className="flex items-center gap-2">
