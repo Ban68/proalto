@@ -16,9 +16,9 @@ export function Footer() {
                     <div>
                         <h4 className="font-semibold text-lg mb-4">Enlaces Rápidos</h4>
                         <ul className="space-y-2">
-                            <li><Link href="#nosotros" className="hover:text-secondary transition-colors">Nosotros</Link></li>
-                            <li><Link href="#creditos" className="hover:text-secondary transition-colors">Créditos</Link></li>
-                            <li><Link href="#libranzas" className="hover:text-secondary transition-colors">Libranzas</Link></li>
+                            <li><Link href="/#nosotros" className="hover:text-secondary transition-colors">Nosotros</Link></li>
+                            <li><Link href="/#creditos" className="hover:text-secondary transition-colors">Créditos</Link></li>
+                            <li><Link href="/#libranzas" className="hover:text-secondary transition-colors">Libranzas</Link></li>
                             <li><Link href="/formulario-de-registro" className="hover:text-secondary transition-colors">Solicitar Crédito</Link></li>
                         </ul>
                     </div>

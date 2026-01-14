@@ -19,19 +19,19 @@ export function Navbar() {
                 </Link>
 
                 <nav className="hidden md:flex gap-6">
-                    <Link href="#nosotros" className="text-sm font-medium hover:text-primary transition-colors">
+                    <Link href="/#nosotros" className="text-sm font-medium hover:text-primary transition-colors">
                         Nosotros
                     </Link>
-                    <Link href="#creditos" className="text-sm font-medium hover:text-primary transition-colors">
+                    <Link href="/#creditos" className="text-sm font-medium hover:text-primary transition-colors">
                         Créditos
                     </Link>
-                    <Link href="#libranzas" className="text-sm font-medium hover:text-primary transition-colors">
+                    <Link href="/#libranzas" className="text-sm font-medium hover:text-primary transition-colors">
                         Convenio Libranzas
                     </Link>
-                    <Link href="#pagos" className="text-sm font-medium hover:text-primary transition-colors">
+                    <Link href="/#pagos" className="text-sm font-medium hover:text-primary transition-colors">
                         Métodos de pago
                     </Link>
-                    <Link href="#contacto" className="text-sm font-medium hover:text-primary transition-colors">
+                    <Link href="/#contacto" className="text-sm font-medium hover:text-primary transition-colors">
                         Contáctanos
                     </Link>
                 </nav>
