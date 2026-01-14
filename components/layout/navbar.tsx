@@ -7,7 +7,7 @@ export function Navbar() {
         <header className="sticky top-0 z-50 w-full bg-[#283e52] text-white shadow-md">
             <div className="container flex h-20 items-center justify-between">
                 <Link href="/" className="flex items-center space-x-2">
-                    <div className="relative h-12 w-48">
+                    <div className="relative h-20 w-64">
                         <Image
                             src="/logo.png"
                             alt="Proalto Logo"
