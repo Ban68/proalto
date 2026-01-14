@@ -4,6 +4,7 @@ import { Creditos } from "@/components/sections/creditos";
 import { Features } from "@/components/sections/features";
 import { Hero } from "@/components/sections/hero";
 import { Libranzas } from "@/components/sections/libranzas";
+import { Contact } from "@/components/sections/contact";
 import { PaymentMethods } from "@/components/sections/payment-methods";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <Creditos />
       <Libranzas />
       <PaymentMethods />
+      <Contact />
       <Footer />
     </main>
   );
