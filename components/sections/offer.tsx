@@ -1,34 +1,32 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-export function Libranzas() {
+export function Offer() {
     return (
-        <section id="libranzas" className="py-24 bg-white">
+        <section id="creditos" className="py-24 bg-white">
             <div className="container">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="space-y-6">
                         <h2 className="text-3xl font-bold tracking-tight text-[#283e52] sm:text-4xl">
-                            Libranzas
+                            ¿Qué ofrecemos?
                         </h2>
                         <p className="text-lg text-muted-foreground leading-relaxed">
-                            La parte de las empresas que permite otorga créditos a sus empleados a tasas competitivas. Promueve de LIBRANZAS, y con ello deja datos para contactarte.
+                            Porque somos una financiera que ofrece CRÉDITOS formales y regulados a tasas competitivas, pagamos grandes montos a nuestros clientes clientes tanto en con en nosotros para brindar beneficios y ser empresas.
                         </p>
-                        <div className="pt-4">
-                            <Link
-                                href="/#contacto"
-                                className="inline-flex h-12 items-center justify-center rounded-md bg-[#fec05c] px-8 text-base font-bold text-[#283e52] shadow transition-colors hover:bg-[#eeb14e]"
-                            >
-                                Haz Clic Aquí
+                        <div className="pt-2">
+                            <Link href="/#creditos" className="inline-flex items-center font-semibold text-[#283e52] hover:text-[#fec05c] transition-colors">
+                                Leer más <ArrowRight className="ml-2 h-4 w-4" />
                             </Link>
                         </div>
                     </div>
                     <div className="relative h-[300px] lg:h-[400px] rounded-2xl overflow-hidden shadow-xl">
-                        {/* Placeholder for Handshake image */}
+                        {/* Placeholder for Man with Laptop image */}
                         <div
                             className="absolute inset-0 bg-cover bg-center bg-gray-200"
-                            style={{ backgroundImage: "url('/libranzas-img.jpg')" }}
+                            style={{ backgroundImage: "url('/offer-img.jpg')" }}
                         >
                             <div className="absolute inset-0 flex items-center justify-center bg-gray-200/50">
-                                <span className="text-gray-500 font-medium">Imagen: Apretón de manos</span>
+                                <span className="text-gray-500 font-medium">Imagen: Hombre en Laptop</span>
                             </div>
                         </div>
                     </div>

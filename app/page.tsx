@@ -1,20 +1,26 @@
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
-import { Creditos } from "@/components/sections/creditos";
-import { Features } from "@/components/sections/features";
+import { Contact } from "@/components/sections/contact";
 import { Hero } from "@/components/sections/hero";
 import { Libranzas } from "@/components/sections/libranzas";
-import { Contact } from "@/components/sections/contact";
+import { Offer } from "@/components/sections/offer";
 import { PaymentMethods } from "@/components/sections/payment-methods";
+import { ProcessSteps } from "@/components/sections/process-steps";
+import { Stats } from "@/components/sections/stats";
+import { Testimonials } from "@/components/sections/testimonials";
+import { Values } from "@/components/sections/values";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background flex flex-col">
       <Navbar />
       <Hero />
-      <Features />
-      <Creditos />
+      <ProcessSteps />
+      <Offer />
+      <Values />
       <Libranzas />
+      <Stats />
+      <Testimonials />
       <PaymentMethods />
       <Contact />
       <Footer />

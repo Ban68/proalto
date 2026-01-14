@@ -4,46 +4,46 @@ import { Menu } from "lucide-react";
 
 export function Navbar() {
     return (
-        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <div className="container flex h-16 items-center justify-between">
+        <header className="sticky top-0 z-50 w-full bg-[#283e52] text-white shadow-md">
+            <div className="container flex h-20 items-center justify-between">
                 <Link href="/" className="flex items-center space-x-2">
-                    <div className="relative h-10 w-40">
+                    <div className="relative h-12 w-48">
                         <Image
                             src="/logo.png"
                             alt="Proalto Logo"
                             fill
-                            className="object-contain object-left"
+                            className="object-contain object-left invert brightness-0 saturate-100 filter" // Make logo white/suitable for dark bg if needed, or rely on distinct logo
                             priority
                         />
                     </div>
                 </Link>
 
-                <nav className="hidden md:flex gap-6">
-                    <Link href="/#nosotros" className="text-sm font-medium hover:text-primary transition-colors">
+                <nav className="hidden md:flex gap-8">
+                    <Link href="/#nosotros" className="text-sm font-medium hover:text-[#fec05c] transition-colors">
                         Nosotros
                     </Link>
-                    <Link href="/#creditos" className="text-sm font-medium hover:text-primary transition-colors">
+                    <Link href="/#creditos" className="text-sm font-medium hover:text-[#fec05c] transition-colors">
                         Créditos
                     </Link>
-                    <Link href="/#libranzas" className="text-sm font-medium hover:text-primary transition-colors">
-                        Convenio Libranzas
+                    <Link href="/#libranzas" className="text-sm font-medium hover:text-[#fec05c] transition-colors">
+                        Libranzas
                     </Link>
-                    <Link href="/#pagos" className="text-sm font-medium hover:text-primary transition-colors">
-                        Métodos de pago
+                    <Link href="/#pagos" className="text-sm font-medium hover:text-[#fec05c] transition-colors">
+                        Pago
                     </Link>
-                    <Link href="/#contacto" className="text-sm font-medium hover:text-primary transition-colors">
-                        Contáctanos
+                    <Link href="/#contacto" className="text-sm font-medium hover:text-[#fec05c] transition-colors">
+                        Contacto
                     </Link>
                 </nav>
 
                 <div className="flex items-center gap-4">
                     <Link
                         href="/formulario-de-registro"
-                        className="hidden md:inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                        className="hidden md:inline-flex h-10 items-center justify-center rounded-md bg-[#fec05c] px-6 py-2 text-sm font-bold text-[#283e52] shadow hover:bg-[#eeb14e] transition-colors"
                     >
                         Solicitar Crédito
                     </Link>
-                    <button className="md:hidden">
+                    <button className="md:hidden text-white">
                         <Menu className="h-6 w-6" />
                         <span className="sr-only">Toggle menu</span>
                     </button>
