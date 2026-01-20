@@ -10,11 +10,9 @@ export function Values() {
                         {/* Placeholder for Person in Field image */}
                         <div
                             className="absolute inset-0 bg-cover bg-center bg-gray-200"
-                            style={{ backgroundImage: "url('/values-img.jpg')" }}
+                            style={{ backgroundImage: "url('/values-img.webp')" }}
                         >
-                            <div className="absolute inset-0 flex items-center justify-center bg-gray-200/50">
-                                <span className="text-gray-500 font-medium">Imagen: Persona en Campo</span>
-                            </div>
+                            {/* Overlay removed */}
                         </div>
                     </div>
                     <div className="space-y-6 order-1 lg:order-2">
