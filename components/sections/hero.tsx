@@ -4,12 +4,13 @@ export function Hero() {
     return (
         <section className="relative pt-52 pb-48 overflow-hidden bg-[#283e52]">
             {/* Background Image Placeholder */}
+            {/* Background Image Placeholder */}
             <div
-                className="absolute inset-0 z-0 bg-cover bg-center opacity-40 mix-blend-overlay"
+                className="absolute inset-0 z-0 bg-cover bg-center opacity-60"
                 style={{ backgroundImage: "url('/hero-bg.jpg')" }}
             />
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#283e52] via-[#283e52]/80 to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#283e52]/90 via-[#283e52]/60 to-transparent z-10" />
 
             <div className="container relative z-20">
                 <div className="max-w-2xl text-white space-y-8">
