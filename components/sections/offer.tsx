@@ -23,7 +23,7 @@ export function Offer() {
                         {/* Placeholder for Man with Laptop image */}
                         <div
                             className="absolute inset-0 bg-cover bg-center bg-gray-200"
-                            style={{ backgroundImage: "url('/offer-img.jpg')" }}
+                            style={{ backgroundImage: "url('/offer-img.webp')" }}
                         >
                             <div className="absolute inset-0 flex items-center justify-center bg-gray-200/50">
                                 <span className="text-gray-500 font-medium">Imagen: Hombre en Laptop</span>
