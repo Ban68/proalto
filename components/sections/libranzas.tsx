@@ -25,11 +25,9 @@ export function Libranzas() {
                         {/* Placeholder for Handshake image */}
                         <div
                             className="absolute inset-0 bg-cover bg-center bg-gray-200"
-                            style={{ backgroundImage: "url('/libranzas-img.jpg')" }}
+                            style={{ backgroundImage: "url('/libranzas-img.webp')" }}
                         >
-                            <div className="absolute inset-0 flex items-center justify-center bg-gray-200/50">
-                                <span className="text-gray-500 font-medium">Imagen: Apretón de manos</span>
-                            </div>
+                            {/* Overlay removed */}
                         </div>
                     </div>
                 </div>
