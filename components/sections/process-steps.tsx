@@ -30,39 +30,62 @@ export function ProcessSteps() {
     ];
 
     return (
-        <section className="relative z-20 -mt-24 px-4">
+        <section className="relative z-20 -mt-24 px-4 hidden md:block">
             <div className="container mx-auto">
                 <div className="bg-white rounded-xl shadow-xl p-0 grid grid-cols-1 md:grid-cols-4 overflow-hidden divide-y md:divide-y-0 md:divide-x divide-gray-100">
                     {steps.map((step, index) => (
-                        <div key={index} className="group relative h-64 p-6 flex flex-col items-center justify-center text-center transition-all hover:bg-[#fec05c] hover:text-[#283e52] cursor-pointer">
+                        <div key={index} className="group relative h-80 overflow-hidden cursor-pointer bg-white">
+                            {/* Sliding Container */}
+                            <div className="absolute w-full h-full transition-transform duration-500 ease-in-out group-hover:-translate-y-full will-change-transform">
 
-                            {/* Normal State (Hidden on Hover) */}
-                            <div className="flex flex-col items-center gap-4 transition-opacity duration-300 group-hover:opacity-0 group-hover:absolute group-hover:pointer-events-none">
-                                <div className="p-4 rounded-full border-2 border-[#fec05c] text-[#fec05c] group-hover:border-white group-hover:text-white transition-colors">
-                                    <step.icon className="w-8 h-8" />
+                                {/* Front Face (Icon + Title) */}
+                                <div className="h-full w-full flex flex-col items-center justify-center p-6 text-center">
+                                    <div className="p-4 rounded-full border-2 border-[#fec05c] text-[#fec05c] transition-colors mb-4">
+                                        <step.icon className="w-8 h-8" />
+                                    </div>
+                                    <h3 className="font-bold text-[#283e52] text-lg">{step.title}</h3>
                                 </div>
-                                <h3 className="font-bold text-[#283e52] text-lg">{step.title}</h3>
+
+                                {/* Back Face (Description + Button) - Rendered conceptually "below" the front face */}
+                                <div className="h-full w-full flex flex-col items-center justify-center p-6 bg-[#fec05c] text-center">
+                                    <h3 className="font-bold text-[#283e52] text-lg mb-2">{step.title}</h3>
+                                    <p className="text-sm font-medium leading-relaxed mb-4 text-[#283e52]">
+                                        {step.description}
+                                    </p>
+                                    {step.buttonText && (
+                                        <a href={step.link} className="inline-block bg-[#283e52] text-white px-4 py-2 rounded-md text-sm font-bold hover:bg-opacity-90 transition-opacity">
+                                            {step.buttonText}
+                                        </a>
+                                    )}
+                                    {!step.buttonText && (
+                                        <div className="w-8 h-1 bg-[#283e52] opacity-50 rounded-full mt-2" />
+                                    )}
+                                </div>
+
                             </div>
 
-                            {/* Hover State (Visible on Hover) */}
-                            <div className="absolute inset-0 p-6 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#fec05c]">
-                                <h3 className="font-bold text-[#283e52] text-lg mb-2">{step.title}</h3>
-                                <p className="text-sm font-medium leading-relaxed mb-4">
-                                    {step.description}
-                                </p>
-                                {step.buttonText && (
-                                    <a href={step.link} className="inline-block bg-[#283e52] text-white px-4 py-2 rounded-md text-sm font-bold hover:bg-opacity-90 transition-opacity">
-                                        {step.buttonText}
-                                    </a>
-                                )}
-                                {!step.buttonText && (
-                                    <div className="w-8 h-1 bg-[#283e52] opacity-50 rounded-full mt-2" />
-                                )}
-                            </div>
-
-                            {/* Make whole card clickable for non-button steps, or for all if desired */}
+                            {/* Clickable Overlay */}
                             {!step.buttonText && (
                                 <a href={step.link} className="absolute inset-0 z-10" aria-label={step.title} />
+                            )}
+                        </div>
+                    ))}
+                </div>
+            </div>
+            {/* Mobile Fallback - Static Layout */}
+            <div className="container mx-auto mt-8 md:hidden">
+                <div className="bg-white rounded-xl shadow-xl p-6 space-y-6">
+                    {steps.map((step, index) => (
+                        <div key={index} className="flex flex-col items-center text-center pb-6 border-b last:border-0 last:pb-0">
+                            <div className="p-3 rounded-full border-2 border-[#fec05c] text-[#fec05c] mb-2">
+                                <step.icon className="w-6 h-6" />
+                            </div>
+                            <h3 className="font-bold text-[#283e52] text-lg mb-1">{step.title}</h3>
+                            <p className="text-sm text-muted-foreground">{step.description}</p>
+                            {step.buttonText && (
+                                <a href={step.link} className="mt-3 inline-block bg-[#283e52] text-white px-4 py-2 rounded-md text-xs font-bold">
+                                    {step.buttonText}
+                                </a>
                             )}
                         </div>
                     ))}
