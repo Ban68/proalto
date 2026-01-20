@@ -20,7 +20,7 @@ export function Values() {
                             ¿Por qué Proalto?
                         </h2>
                         <p className="text-lg text-muted-foreground leading-relaxed">
-                            Porque somos unas empresas que ofrece CRÉDITOS formales y regulados a tasas rentas, somos una nueva alternativa. Con miles de de empresas que confían en nosotros para brindar beneficios y ser empresas.
+                            Más que una financiera, somos tu aliado estratégico. Nos destacamos por nuestra solidez, transparencia y rapidez en el servicio. Miles de clientes confían en nosotros gracias a nuestro compromiso con su bienestar financiero y nuestras tasas competitivas.
                         </p>
                         <div className="pt-2">
                             <Link href="/#nosotros" className="inline-flex items-center font-semibold text-[#283e52] hover:text-[#fec05c] transition-colors">

@@ -11,7 +11,7 @@ export function Offer() {
                             ¿Qué ofrecemos?
                         </h2>
                         <p className="text-lg text-muted-foreground leading-relaxed">
-                            Porque somos una financiera que ofrece CRÉDITOS formales y regulados a tasas competitivas, pagamos grandes montos a nuestros clientes clientes tanto en con en nosotros para brindar beneficios y ser empresas.
+                            Diseñamos soluciones financieras ágiles y transparentes que se adaptan a tus necesidades. Ofrecemos créditos de libranza y libre inversión con desembolso rápido, sin trámites engorrosos y con la seguridad de una entidad regulada.
                         </p>
                         <div className="pt-2">
                             <Link href="/#creditos" className="inline-flex items-center font-semibold text-[#283e52] hover:text-[#fec05c] transition-colors">
