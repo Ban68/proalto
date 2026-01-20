@@ -14,7 +14,7 @@ export function Offer() {
                             Diseñamos soluciones financieras ágiles y transparentes que se adaptan a tus necesidades. Ofrecemos créditos de libranza y libre inversión con desembolso rápido, sin trámites engorrosos y con la seguridad de una entidad regulada.
                         </p>
                         <div className="pt-2">
-                            <Link href="/#creditos" className="inline-flex items-center font-semibold text-[#283e52] hover:text-[#fec05c] transition-colors">
+                            <Link href="/credito-libranza" className="inline-flex items-center font-semibold text-[#283e52] hover:text-[#fec05c] transition-colors">
                                 Leer más <ArrowRight className="ml-2 h-4 w-4" />
                             </Link>
                         </div>
