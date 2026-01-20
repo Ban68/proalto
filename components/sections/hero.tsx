@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function Hero() {
     return (
-        <section className="relative pt-32 pb-48 overflow-hidden bg-[#283e52]">
+        <section className="relative pt-52 pb-48 overflow-hidden bg-[#283e52]">
             {/* Background Image Placeholder */}
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center opacity-40 mix-blend-overlay"
