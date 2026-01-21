@@ -23,7 +23,7 @@ export function Values() {
                             Más que una financiera, somos tu aliado estratégico. Nos destacamos por nuestra solidez, transparencia y rapidez en el servicio. Miles de clientes confían en nosotros gracias a nuestro compromiso con su bienestar financiero y nuestras tasas competitivas.
                         </p>
                         <div className="pt-2">
-                            <Link href="/#nosotros" className="inline-flex items-center font-semibold text-[#283e52] hover:text-[#fec05c] transition-colors">
+                            <Link href="/nosotros" className="inline-flex items-center font-semibold text-[#283e52] hover:text-[#fec05c] transition-colors">
                                 Leer más <ArrowRight className="ml-2 h-4 w-4" />
                             </Link>
                         </div>
