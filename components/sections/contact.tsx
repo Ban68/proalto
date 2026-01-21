@@ -5,13 +5,13 @@ import { Send } from "lucide-react";
 
 export function Contact() {
     return (
-        <section id="contacto" className="relative py-24 bg-slate-900 text-white overflow-hidden">
+        <section id="contacto" className="relative py-24 bg-[#283e52] text-white overflow-hidden">
             {/* Background with overlay */}
-            <div className="absolute inset-0 bg-slate-900/90 z-10" />
-            <div
-                className="absolute inset-0 z-0 bg-cover bg-center opacity-30"
-                style={{ backgroundImage: "url('/contact-bg.jpg')" }} // Placeholder, will rely on solid color if image missing
-            />
+            <div className="absolute inset-0 bg-[#283e52] z-10" />
+
+            {/* Decorative elements similar to Hero */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[#fec05c]/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#fec05c]/5 rounded-full blur-3xl -ml-20 -mb-20"></div>
 
             <div className="container relative z-20">
                 <div className="text-center mb-16">
@@ -24,7 +24,7 @@ export function Contact() {
                     {/* Contact Info */}
                     <div className="space-y-8">
                         <div>
-                            <h3 className="text-[#fbbf24] text-xl font-bold mb-2">Oficina</h3>
+                            <h3 className="text-[#fec05c] text-xl font-bold mb-2">Oficina</h3>
                             <p className="text-gray-100">
                                 Calle 24 No. 3 -99 Oficina 909 Edificio 424
                                 <br />
@@ -33,7 +33,7 @@ export function Contact() {
                         </div>
 
                         <div>
-                            <h3 className="text-[#fbbf24] text-xl font-bold mb-2">Contáctanos</h3>
+                            <h3 className="text-[#fec05c] text-xl font-bold mb-2">Contáctanos</h3>
                             <p className="text-gray-100 mb-1">info@proalto.co</p>
                             <p className="text-gray-100">
                                 Celulares: 3203454201 - 3114121467
@@ -41,7 +41,7 @@ export function Contact() {
                         </div>
 
                         <div>
-                            <h3 className="text-[#fbbf24] text-xl font-bold mb-2">Horario De Atención</h3>
+                            <h3 className="text-[#fec05c] text-xl font-bold mb-2">Horario De Atención</h3>
                             <p className="text-gray-100">
                                 Lunes a viernes: 7:30 am a 5:30 pm
                             </p>
@@ -87,7 +87,7 @@ export function Contact() {
 
                             <button
                                 type="submit"
-                                className="w-full h-12 bg-[#fbbf24] hover:bg-[#f59e0b] text-white font-bold tracking-wider rounded-md transition-colors flex items-center justify-center uppercase mt-6"
+                                className="w-full h-12 bg-[#fec05c] hover:bg-[#eeb14e] text-[#283e52] font-bold tracking-wider rounded-md transition-colors flex items-center justify-center uppercase mt-6 shadow-lg"
                             >
                                 Enviar
                             </button>
