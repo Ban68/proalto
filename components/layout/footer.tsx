@@ -46,7 +46,7 @@ export function Footer() {
                         <ul className="space-y-2">
                             <li><Link href="#" className="hover:text-secondary transition-colors">Términos y Condiciones</Link></li>
                             <li><Link href="/politica-tratamiento-datos.pdf" className="hover:text-secondary transition-colors" target="_blank" rel="noopener noreferrer">Política de Tratamiento de Datos</Link></li>
-                            <li><Link href="#" className="hover:text-secondary transition-colors">Tasas y Tarifas</Link></li>
+                            <li><Link href="/tasas-y-tarifas" className="hover:text-secondary transition-colors">Tasas y Tarifas</Link></li>
                         </ul>
                         <div className="mt-6 flex gap-4">
                             <Link href="#" className="hover:text-secondary transition-colors"><Facebook className="h-6 w-6" /></Link>
