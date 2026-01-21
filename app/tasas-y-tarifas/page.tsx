@@ -65,7 +65,7 @@ export default function TasasPage() {
                             <div className="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
                                 <h4 className="font-bold text-[#283e52] mb-2 text-lg">Comisión de Gestión</h4>
                                 <p className="text-3xl font-bold text-[#283e52] mb-1">
-                                    Hasta 3% <span className="text-base font-normal text-muted-foreground">del valor del crédito</span>
+                                    4,5% <span className="text-base font-normal text-muted-foreground">del valor del crédito</span>
                                 </p>
                                 <p className="text-sm text-gray-600 leading-relaxed mt-3">
                                     Este valor cubre el estudio de crédito, consulta en centrales y gastos administrativos. Se computa para calcular la tasa máxima de interés vigente permitida.
