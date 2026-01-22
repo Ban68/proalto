@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { submitApplication } from "@/app/actions";
+import colombiaData from "@/lib/colombia.json";
 
 interface Department {
     id: number;
@@ -17,8 +18,8 @@ export function CreditApplicationForm() {
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Location Data
-    const [departments, setDepartments] = useState<Department[]>([]);
+    // Location Data (Static Import)
+    const departments: Department[] = colombiaData as Department[];
     const [cities, setCities] = useState<string[]>([]);
 
     // Controlled Inputs
@@ -26,16 +27,6 @@ export function CreditApplicationForm() {
     const [amount, setAmount] = useState("");
     const [monthlyIncome, setMonthlyIncome] = useState("");
     const [phone, setPhone] = useState("");
-
-    // Fetch Location Data on Mount
-    useEffect(() => {
-        fetch("/data/colombia.json")
-            .then((res) => res.json())
-            .then((data) => {
-                setDepartments(data);
-            })
-            .catch((err) => console.error("Failed to load locations", err));
-    }, []);
 
     // Handle Department Change
     const handleDeptChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
