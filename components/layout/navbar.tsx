@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import { Menu, Facebook, Instagram } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -63,6 +63,14 @@ export function Navbar() {
                 </nav>
 
                 <div className="flex items-center gap-4">
+                    <div className="hidden md:flex items-center gap-3 mr-2">
+                        <Link href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#fec05c] transition-colors">
+                            <Facebook className="h-5 w-5" />
+                        </Link>
+                        <Link href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#fec05c] transition-colors">
+                            <Instagram className="h-5 w-5" />
+                        </Link>
+                    </div>
                     <Link
                         href="/formulario-de-registro"
                         className="hidden md:inline-flex h-10 items-center justify-center rounded-md bg-[#fec05c] px-6 py-2 text-sm font-bold text-[#283e52] shadow hover:bg-[#eeb14e] transition-colors"
