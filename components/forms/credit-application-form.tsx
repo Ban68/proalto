@@ -313,15 +313,27 @@ export function CreditApplicationForm() {
             <div className="space-y-4 pt-4">
                 <label className="flex items-start gap-3 cursor-pointer">
                     <input type="checkbox" name="creditReportAuth" required className="accent-[#fec05c] w-5 h-5 mt-0.5" />
-                    <span className="text-sm font-bold text-[#fec05c]">Autorización De Consulta Y Reportes De Información.</span>
+                    <span className="text-sm font-bold text-[#fec05c] hover:underline">
+                        <a href="/documents/autorizacion-consulta-reportes.pdf" target="_blank" rel="noopener noreferrer">
+                            Autorización De Consulta Y Reportes De Información.
+                        </a>
+                    </span>
                 </label>
                 <label className="flex items-start gap-3 cursor-pointer">
                     <input type="checkbox" name="dataAuth" required className="accent-[#fec05c] w-5 h-5 mt-0.5" />
-                    <span className="text-sm font-bold text-[#fec05c]">Autorización Tratamiento De Información De Clientes.</span>
+                    <span className="text-sm font-bold text-[#fec05c] hover:underline">
+                        <a href="/documents/politica-tratamiento-datos.pdf" target="_blank" rel="noopener noreferrer">
+                            Autorización Tratamiento De Información De Clientes.
+                        </a>
+                    </span>
                 </label>
                 <label className="flex items-start gap-3 cursor-pointer">
                     <input type="checkbox" name="terms" required className="accent-[#fec05c] w-5 h-5 mt-0.5" />
-                    <span className="text-sm font-bold text-[#fec05c]">Acepto Los Términos y condiciones.</span>
+                    <span className="text-sm font-bold text-[#fec05c] hover:underline">
+                        <a href="/documents/terminos-y-condiciones.pdf" target="_blank" rel="noopener noreferrer">
+                            Acepto Los Términos y condiciones.
+                        </a>
+                    </span>
                 </label>
                 <label className="flex items-start gap-3 cursor-pointer">
                     <input type="checkbox" name="digitalService" className="accent-[#fec05c] w-5 h-5 mt-0.5" />
