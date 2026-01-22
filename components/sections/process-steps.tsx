@@ -1,4 +1,5 @@
 import { ClipboardList, Upload, Handshake, Coins } from "lucide-react";
+import { FadeIn } from "@/components/ui/fade-in";
 
 export function ProcessSteps() {
     const steps = [
@@ -31,47 +32,49 @@ export function ProcessSteps() {
 
     return (
         <section className="relative z-20 -mt-24 px-4 hidden md:block">
-            <div className="container mx-auto">
-                <div className="bg-white rounded-xl shadow-xl p-0 grid grid-cols-1 md:grid-cols-4 overflow-hidden divide-y md:divide-y-0 md:divide-x divide-gray-100">
-                    {steps.map((step, index) => (
-                        <div key={index} className="group relative h-80 overflow-hidden cursor-pointer bg-white">
-                            {/* Sliding Container */}
-                            <div className="absolute w-full h-full transition-transform duration-500 ease-in-out group-hover:-translate-y-full will-change-transform">
+            <FadeIn delay={0.6} direction="up" fullWidth>
+                <div className="container mx-auto">
+                    <div className="bg-white rounded-xl shadow-xl p-0 grid grid-cols-1 md:grid-cols-4 overflow-hidden divide-y md:divide-y-0 md:divide-x divide-gray-100">
+                        {steps.map((step, index) => (
+                            <div key={index} className="group relative h-80 overflow-hidden cursor-pointer bg-white">
+                                {/* Sliding Container */}
+                                <div className="absolute w-full h-full transition-transform duration-500 ease-in-out group-hover:-translate-y-full will-change-transform">
 
-                                {/* Front Face (Icon + Title) */}
-                                <div className="h-full w-full flex flex-col items-center justify-center p-6 text-center">
-                                    <div className="p-4 rounded-full border-2 border-[#fec05c] text-[#fec05c] transition-colors mb-4">
-                                        <step.icon className="w-8 h-8" />
+                                    {/* Front Face (Icon + Title) */}
+                                    <div className="h-full w-full flex flex-col items-center justify-center p-6 text-center">
+                                        <div className="p-4 rounded-full border-2 border-[#fec05c] text-[#fec05c] transition-colors mb-4">
+                                            <step.icon className="w-8 h-8" />
+                                        </div>
+                                        <h3 className="font-bold text-[#283e52] text-lg">{step.title}</h3>
                                     </div>
-                                    <h3 className="font-bold text-[#283e52] text-lg">{step.title}</h3>
+
+                                    {/* Back Face (Description + Button) - Rendered conceptually "below" the front face */}
+                                    <div className="h-full w-full flex flex-col items-center justify-center p-6 bg-[#fec05c] text-center">
+                                        <h3 className="font-bold text-[#283e52] text-lg mb-2">{step.title}</h3>
+                                        <p className="text-sm font-medium leading-relaxed mb-4 text-[#283e52]">
+                                            {step.description}
+                                        </p>
+                                        {step.buttonText && (
+                                            <a href={step.link} className="inline-block bg-[#283e52] text-white px-4 py-2 rounded-md text-sm font-bold hover:bg-opacity-90 transition-opacity">
+                                                {step.buttonText}
+                                            </a>
+                                        )}
+                                        {!step.buttonText && (
+                                            <div className="w-8 h-1 bg-[#283e52] opacity-50 rounded-full mt-2" />
+                                        )}
+                                    </div>
+
                                 </div>
 
-                                {/* Back Face (Description + Button) - Rendered conceptually "below" the front face */}
-                                <div className="h-full w-full flex flex-col items-center justify-center p-6 bg-[#fec05c] text-center">
-                                    <h3 className="font-bold text-[#283e52] text-lg mb-2">{step.title}</h3>
-                                    <p className="text-sm font-medium leading-relaxed mb-4 text-[#283e52]">
-                                        {step.description}
-                                    </p>
-                                    {step.buttonText && (
-                                        <a href={step.link} className="inline-block bg-[#283e52] text-white px-4 py-2 rounded-md text-sm font-bold hover:bg-opacity-90 transition-opacity">
-                                            {step.buttonText}
-                                        </a>
-                                    )}
-                                    {!step.buttonText && (
-                                        <div className="w-8 h-1 bg-[#283e52] opacity-50 rounded-full mt-2" />
-                                    )}
-                                </div>
-
+                                {/* Clickable Overlay */}
+                                {!step.buttonText && (
+                                    <a href={step.link} className="absolute inset-0 z-10" aria-label={step.title} />
+                                )}
                             </div>
-
-                            {/* Clickable Overlay */}
-                            {!step.buttonText && (
-                                <a href={step.link} className="absolute inset-0 z-10" aria-label={step.title} />
-                            )}
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </div>
+            </FadeIn>
             {/* Mobile Fallback - Static Layout */}
             <div className="container mx-auto mt-8 md:hidden">
                 <div className="bg-white rounded-xl shadow-xl p-6 space-y-6">
