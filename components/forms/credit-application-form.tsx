@@ -1,15 +1,74 @@
 "use client";
 
-import { useState } from "react";
-import { CheckCircle2, Loader2, UploadCloud } from "lucide-react";
+import { useState, useEffect } from "react";
+import { CheckCircle2, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { submitApplication } from "@/app/actions";
+
+interface Department {
+    id: number;
+    departamento: string;
+    ciudades: string[];
+}
 
 export function CreditApplicationForm() {
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
+
+    // Location Data
+    const [departments, setDepartments] = useState<Department[]>([]);
+    const [cities, setCities] = useState<string[]>([]);
+
+    // Controlled Inputs
+    const [selectedDept, setSelectedDept] = useState("");
+    const [amount, setAmount] = useState("");
+    const [monthlyIncome, setMonthlyIncome] = useState("");
+    const [phone, setPhone] = useState("");
+
+    // Fetch Location Data on Mount
+    useEffect(() => {
+        fetch("/data/colombia.json")
+            .then((res) => res.json())
+            .then((data) => {
+                setDepartments(data);
+            })
+            .catch((err) => console.error("Failed to load locations", err));
+    }, []);
+
+    // Handle Department Change
+    const handleDeptChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const deptName = e.target.value;
+        setSelectedDept(deptName);
+        const dept = departments.find(d => d.departamento === deptName);
+        setCities(dept ? dept.ciudades : []);
+    };
+
+    // Currency Formatter
+    const formatCurrency = (value: string) => {
+        // Remove non-digits
+        const number = value.replace(/\D/g, "");
+        if (!number) return "";
+        return new Intl.NumberFormat("es-CO", {
+            style: "currency",
+            currency: "COP",
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        }).format(Number(number));
+    };
+
+    const handleCurrencyChange = (e: React.ChangeEvent<HTMLInputElement>, setter: (val: string) => void) => {
+        setter(formatCurrency(e.target.value));
+    };
+
+    // Phone Validator (Only numbers, max 10)
+    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = e.target.value.replace(/\D/g, ""); // Remove non-numeric
+        if (val.length <= 10) {
+            setPhone(val);
+        }
+    };
 
     async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -29,12 +88,12 @@ export function CreditApplicationForm() {
 
     if (isSuccess) {
         return (
-            <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
+            <div className="flex flex-col items-center justify-center py-12 text-center space-y-4 text-white">
                 <div className="h-16 w-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
                     <CheckCircle2 className="h-8 w-8" />
                 </div>
                 <h3 className="text-2xl font-bold">¡Solicitud Recibida!</h3>
-                <p className="text-muted-foreground max-w-md">
+                <p className="text-gray-300 max-w-md">
                     Hemos recibido tu solicitud correctamente. Uno de nuestros asesores revisará tu información y te contactará en menos de 24 horas.
                 </p>
             </div>
@@ -108,9 +167,16 @@ export function CreditApplicationForm() {
                         name="phone"
                         type="tel"
                         required
+                        value={phone}
+                        onChange={handlePhoneChange}
+                        minLength={10}
+                        maxLength={10}
                         className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
-                        placeholder="NO. De Celular"
+                        placeholder="3001234567"
                     />
+                    {phone.length > 0 && phone.length < 10 && (
+                        <span className="text-xs text-red-400">Debe tener 10 dígitos</span>
+                    )}
                 </div>
                 <div className="space-y-2">
                     <label htmlFor="address" className="text-sm font-bold">Dirección</label>
@@ -122,25 +188,44 @@ export function CreditApplicationForm() {
                         placeholder="Dirección"
                     />
                 </div>
+
+                {/* Department Dropdown */}
                 <div className="space-y-2">
                     <label htmlFor="department" className="text-sm font-bold">Departamento</label>
-                    <input
+                    <select
                         id="department"
                         name="department"
                         required
+                        value={selectedDept}
+                        onChange={handleDeptChange}
                         className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
-                        placeholder="Departamento"
-                    />
+                    >
+                        <option value="">Seleccione...</option>
+                        {departments.map((dept) => (
+                            <option key={dept.id} value={dept.departamento}>
+                                {dept.departamento}
+                            </option>
+                        ))}
+                    </select>
                 </div>
+
+                {/* City Dropdown */}
                 <div className="space-y-2">
                     <label htmlFor="city" className="text-sm font-bold">Ciudad</label>
-                    <input
+                    <select
                         id="city"
                         name="city"
                         required
-                        className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
-                        placeholder="Ciudad"
-                    />
+                        disabled={!selectedDept}
+                        className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c] disabled:opacity-50"
+                    >
+                        <option value="">Seleccione...</option>
+                        {cities.map((city) => (
+                            <option key={city} value={city}>
+                                {city}
+                            </option>
+                        ))}
+                    </select>
                 </div>
             </div>
 
@@ -184,11 +269,11 @@ export function CreditApplicationForm() {
                     <input
                         id="amount"
                         name="amount"
-                        type="number"
-                        min="500000"
                         required
+                        value={amount}
+                        onChange={(e) => handleCurrencyChange(e, setAmount)}
                         className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
-                        placeholder="Sin puntos"
+                        placeholder="$ 1.000.000"
                     />
                 </div>
             </div>
@@ -224,10 +309,11 @@ export function CreditApplicationForm() {
                     <input
                         id="monthlyIncome"
                         name="monthlyIncome"
-                        type="number"
                         required
+                        value={monthlyIncome}
+                        onChange={(e) => handleCurrencyChange(e, setMonthlyIncome)}
                         className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
-                        placeholder="Salario / ingresos"
+                        placeholder="$ 2.000.000"
                     />
                 </div>
             </div>

@@ -22,10 +22,11 @@ export async function submitApplication(formData: FormData) {
     // Employment & Credit Details
     const company = formData.get("company") as string;
     const purpose = formData.get("purpose") as string;
-    const amount = formData.get("amount") as string;
+    // Strip non-numeric characters for currency fields
+    const amount = (formData.get("amount") as string).replace(/\D/g, "");
     const term = formData.get("term") as string;
     const employmentType = formData.get("employmentType") as string;
-    const monthlyIncome = formData.get("monthlyIncome") as string;
+    const monthlyIncome = (formData.get("monthlyIncome") as string).replace(/\D/g, "");
 
     // Digital Service Option
     const digitalService = formData.get("digitalService") === "on";
