@@ -42,113 +42,231 @@ export function CreditApplicationForm() {
     }
 
     return (
-        <form onSubmit={onSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                        Nombre Completo *
-                    </label>
-                    <input
-                        id="name"
-                        name="name"
-                        required
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        placeholder="Juan Pérez"
-                    />
+        <form onSubmit={onSubmit} className="space-y-8 bg-[#0B1221] p-8 rounded-3xl text-white shadow-2xl">
+
+            {/* Row 1 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                {/* Tipo de Identificación */}
+                <div className="space-y-3">
+                    <label className="text-sm font-bold">Tipo de identificación</label>
+                    <div className="flex gap-4">
+                        <label className="flex items-center space-x-2 cursor-pointer">
+                            <input type="radio" name="identificationType" value="CC" defaultChecked className="accent-[#fec05c] w-4 h-4" />
+                            <span>CC</span>
+                        </label>
+                        <label className="flex items-center space-x-2 cursor-pointer">
+                            <input type="radio" name="identificationType" value="NIT" className="accent-[#fec05c] w-4 h-4" />
+                            <span>NIT</span>
+                        </label>
+                    </div>
                 </div>
+
+                {/* Número de identificación */}
                 <div className="space-y-2">
-                    <label htmlFor="cedula" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                        Cédula *
-                    </label>
+                    <label htmlFor="cedula" className="text-sm font-bold">Número de identificación</label>
                     <input
                         id="cedula"
                         name="cedula"
                         required
-                        type="number"
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        placeholder="1234567890"
+                        className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
+                        placeholder="Número de identificación"
+                    />
+                </div>
+
+                {/* Nombre del Cliente */}
+                <div className="space-y-2">
+                    <label htmlFor="name" className="text-sm font-bold">Nombre del cliente</label>
+                    <input
+                        id="name"
+                        name="name"
+                        required
+                        className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
+                        placeholder="Nombre del cliente"
+                    />
+                </div>
+
+                {/* Fecha de nacimiento */}
+                <div className="space-y-2">
+                    <label htmlFor="birthDate" className="text-sm font-bold">Fecha de nacimiento*</label>
+                    <input
+                        id="birthDate"
+                        name="birthDate"
+                        type="date"
+                        required
+                        className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
                     />
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Row 2 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                        Correo Electrónico *
-                    </label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        placeholder="juan@ejemplo.com"
-                    />
-                </div>
-                <div className="space-y-2">
-                    <label htmlFor="phone" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                        Celular *
-                    </label>
+                    <label htmlFor="phone" className="text-sm font-bold uppercase">No. De Celular</label>
                     <input
                         id="phone"
                         name="phone"
                         type="tel"
                         required
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        placeholder="300 123 4567"
+                        className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
+                        placeholder="NO. De Celular"
+                    />
+                </div>
+                <div className="space-y-2">
+                    <label htmlFor="address" className="text-sm font-bold">Dirección</label>
+                    <input
+                        id="address"
+                        name="address"
+                        required
+                        className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
+                        placeholder="Dirección"
+                    />
+                </div>
+                <div className="space-y-2">
+                    <label htmlFor="department" className="text-sm font-bold">Departamento</label>
+                    <input
+                        id="department"
+                        name="department"
+                        required
+                        className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
+                        placeholder="Departamento"
+                    />
+                </div>
+                <div className="space-y-2">
+                    <label htmlFor="city" className="text-sm font-bold">Ciudad</label>
+                    <input
+                        id="city"
+                        name="city"
+                        required
+                        className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
+                        placeholder="Ciudad"
                     />
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Row 3 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="space-y-2">
-                    <label htmlFor="amount" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                        Monto Solicitado ($) *
-                    </label>
+                    <label htmlFor="email" className="text-sm font-bold">Email</label>
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
+                        placeholder="Email"
+                    />
+                </div>
+                <div className="space-y-2">
+                    <label htmlFor="company" className="text-sm font-bold">Nombre de empresa con libranzas</label>
+                    <textarea
+                        id="company"
+                        name="company"
+                        required
+                        className="flex min-h-[40px] w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c] resize-none"
+                        placeholder="Nombre de la empresa"
+                        rows={2}
+                    />
+                </div>
+                <div className="space-y-2">
+                    <label htmlFor="purpose" className="text-sm font-bold">Propósito del crédito</label>
+                    <textarea
+                        id="purpose"
+                        name="purpose"
+                        required
+                        className="flex min-h-[40px] w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c] resize-none"
+                        placeholder="Propósito del crédito"
+                        rows={2}
+                    />
+                </div>
+                <div className="space-y-2">
+                    <label htmlFor="amount" className="text-sm font-bold">Monto a solicitar</label>
                     <input
                         id="amount"
                         name="amount"
                         type="number"
-                        required
                         min="500000"
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        placeholder="1000000"
-                    />
-                </div>
-                <div className="space-y-2">
-                    <label htmlFor="term" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                        Plazo (Meses) *
-                    </label>
-                    <select
-                        id="term"
-                        name="term"
                         required
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    >
-                        <option value="">Seleccione...</option>
-                        <option value="6">6 Meses</option>
-                        <option value="12">12 Meses</option>
-                        <option value="18">18 Meses</option>
-                        <option value="24">24 Meses</option>
-                        <option value="36">36 Meses</option>
-                        <option value="48">48 Meses</option>
-                    </select>
+                        className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
+                        placeholder="Sin puntos"
+                    />
                 </div>
             </div>
 
-            <div className="pt-4">
+            {/* Row 4 */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                    <label htmlFor="term" className="text-sm font-bold">Plazo (en meses)</label>
+                    <input
+                        id="term"
+                        name="term"
+                        type="number"
+                        required
+                        className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
+                        placeholder="Plazo (en meses)"
+                    />
+                </div>
+                <div className="space-y-2">
+                    <label htmlFor="employmentType" className="text-sm font-bold">Tipo de Trabajo *</label>
+                    <select
+                        id="employmentType"
+                        name="employmentType"
+                        required
+                        className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black focus:ring-2 focus:ring-[#fec05c]"
+                    >
+                        <option value="empleado">Empleado</option>
+                        <option value="pensionado">Pensionado</option>
+                        <option value="independiente">Independiente</option>
+                    </select>
+                </div>
+                <div className="space-y-2">
+                    <label htmlFor="monthlyIncome" className="text-sm font-bold">Salario / ingresos mensuales</label>
+                    <input
+                        id="monthlyIncome"
+                        name="monthlyIncome"
+                        type="number"
+                        required
+                        className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
+                        placeholder="Salario / ingresos"
+                    />
+                </div>
+            </div>
+
+            {/* Checkboxes */}
+            <div className="space-y-4 pt-4">
+                <label className="flex items-start gap-3 cursor-pointer">
+                    <input type="checkbox" name="creditReportAuth" required className="accent-[#fec05c] w-5 h-5 mt-0.5" />
+                    <span className="text-sm font-bold text-[#fec05c]">Autorización De Consulta Y Reportes De Información.</span>
+                </label>
+                <label className="flex items-start gap-3 cursor-pointer">
+                    <input type="checkbox" name="dataAuth" required className="accent-[#fec05c] w-5 h-5 mt-0.5" />
+                    <span className="text-sm font-bold text-[#fec05c]">Autorización Tratamiento De Información De Clientes.</span>
+                </label>
+                <label className="flex items-start gap-3 cursor-pointer">
+                    <input type="checkbox" name="terms" required className="accent-[#fec05c] w-5 h-5 mt-0.5" />
+                    <span className="text-sm font-bold text-[#fec05c]">Acepto Los Términos y condiciones.</span>
+                </label>
+                <label className="flex items-start gap-3 cursor-pointer">
+                    <input type="checkbox" name="digitalService" className="accent-[#fec05c] w-5 h-5 mt-0.5" />
+                    <span className="text-sm italic text-white/90">
+                        <strong className="text-white not-italic">100% digital(opcional)</strong> El cobro de $20.000 pesos colombiano por el uso de la plataforma 100% digital es opcional y te permite firmar electrónicamente la documentación relacionado con el crédito solicitado, ahorrándote tiempo y dinero. Este costo es único y se cobra en el momento del desembolso del crédito.
+                    </span>
+                </label>
+            </div>
+
+            <div className="pt-8">
                 <button
                     type="submit"
                     disabled={isLoading}
                     className={cn(
-                        "inline-flex w-full items-center justify-center rounded-md bg-primary px-8 py-3 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+                        "w-full rounded-full bg-[#fec05c] px-8 py-4 text-lg font-bold text-[#283e52] shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:pointer-events-none",
                         isLoading && "cursor-wait opacity-50"
                     )}
                 >
                     {isLoading ? (
                         <>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Procesando...
+                            <Loader2 className="mr-2 h-5 w-5 animate-spin inline" />
+                            Enviando...
                         </>
                     ) : (
                         "Enviar Solicitud"
@@ -156,8 +274,8 @@ export function CreditApplicationForm() {
                 </button>
             </div>
 
-            <p className="text-xs text-center text-muted-foreground">
-                Al enviar este formulario acepta nuestras políticas de tratamiento de datos y términos y condiciones.
+            <p className="text-sm text-center text-gray-300 mt-6 leading-relaxed max-w-3xl mx-auto">
+                Para agilizar tu solicitud envíanos al correo <a href="mailto:servicioalcliente@proalto.co" className="text-[#fec05c] underline">servicioalcliente@proalto.co</a> fotocopia de tu cédula, RUT, certificación de tus ingresos y cámara de comercio.
             </p>
         </form>
     );

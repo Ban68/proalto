@@ -7,7 +7,7 @@ export default function RegisterPage() {
         <div className="min-h-screen bg-background flex flex-col">
             <Navbar />
             <main className="flex-1 container py-12 md:py-24">
-                <div className="max-w-2xl mx-auto space-y-8">
+                <div className="max-w-7xl mx-auto space-y-8">
                     <div className="text-center space-y-2">
                         <h1 className="text-3xl font-bold tracking-tight">Solicitud de Crédito</h1>
                         <p className="text-muted-foreground">
