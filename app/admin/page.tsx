@@ -92,31 +92,42 @@ export default async function AdminPage() {
                                             ${app.monthlyIncome ? Number(app.monthlyIncome).toLocaleString('es-CO') : '-'}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {Array.isArray(app.documents) && (app.documents as any[]).length > 0 ? (
-                                                <div className="flex flex-col gap-2">
-                                                    {(app.documents as any[]).map((doc, idx) => (
-                                                        <a
-                                                            key={idx}
-                                                            href={doc.url}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 hover:underline"
-                                                            title={doc.name}
-                                                        >
-                                                            <Download className="w-3 h-3" />
-                                                            <span className="truncate max-w-[100px]">{doc.name}</span>
-                                                        </a>
-                                                    ))}
-                                                </div>
-                                            ) : (
-                                                <span className="text-xs text-gray-400">-</span>
-                                            )}
+                                            {(() => {
+                                                const docs = app.documents;
+                                                // Handle null/undefined
+                                                if (!docs) return <span className="text-xs text-gray-400">Sin documentos</span>;
+
+                                                // Handle if specific type check fails but it has data
+                                                const docsArray = Array.isArray(docs) ? docs : [];
+
+                                                if (docsArray.length === 0) {
+                                                    return <span className="text-xs text-gray-400">0 archivos</span>;
+                                                }
+
+                                                return (
+                                                    <div className="flex flex-col gap-2">
+                                                        {(docsArray as any[]).map((doc, idx) => (
+                                                            <a
+                                                                key={idx}
+                                                                href={doc.url}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 hover:underline"
+                                                                title={doc.name}
+                                                            >
+                                                                <Download className="w-3 h-3" />
+                                                                <span className="truncate max-w-[150px]">{doc.name.replace(/^\[.*?\]-\d+-/, '')}</span>
+                                                            </a>
+                                                        ))}
+                                                    </div>
+                                                );
+                                            })()}
                                         </td>
                                     </tr>
                                 ))}
                                 {applications.length === 0 && (
                                     <tr>
-                                        <td colSpan={7} className="px-6 py-12 text-center text-gray-400">
+                                        <td colSpan={8} className="px-6 py-12 text-center text-gray-400">
                                             No hay solicitudes registradas aún.
                                         </td>
                                     </tr>

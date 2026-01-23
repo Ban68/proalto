@@ -40,7 +40,6 @@ export async function submitApplication(formData: FormData) {
 
     try {
         // Process Attachments (Upload to Supabase & Email Attachment)
-        // We now have individual fields: doc_cedula, doc_rut, doc_laboral, doc_ingresos, doc_camara, doc_otros
         const docFields = [
             { key: 'doc_cedula', prefix: 'CEDULA' },
             { key: 'doc_rut', prefix: 'RUT' },
@@ -62,17 +61,18 @@ export async function submitApplication(formData: FormData) {
             });
         }
 
-        const uploadedDocs: { name: string; url: string }[] = [];
-
-        const attachments = await Promise.all(
+        // Process uploads and collect metadata
+        const processedFiles = await Promise.all(
             allFiles.map(async ({ file, prefix }) => {
                 const buffer = Buffer.from(await file.arrayBuffer());
 
-                // Upload to Supabase
                 // Filename: [TYPE] - Timestamp - OriginalName
                 const cleanName = file.name.replace(/\s/g, '-');
                 const filename = `[${prefix}]-${Date.now()}-${cleanName}`;
 
+                let publicUrl = null;
+
+                // Upload to Supabase
                 const { data, error } = await supabase.storage
                     .from('applications')
                     .upload(filename, buffer, {
@@ -84,21 +84,20 @@ export async function submitApplication(formData: FormData) {
                     const { data: publicUrlData } = supabase.storage
                         .from('applications')
                         .getPublicUrl(filename);
-
-                    uploadedDocs.push({
-                        name: filename, // Storing the full prefixed name so admin knows what it is
-                        url: publicUrlData.publicUrl
-                    });
+                    publicUrl = publicUrlData.publicUrl;
                 } else {
                     console.error("Supabase Upload Error:", error);
                 }
 
                 return {
-                    filename: filename, // Send prefixed name in email too
-                    content: buffer,
+                    attachment: { filename: filename, content: buffer },
+                    dbRecord: publicUrl ? { name: filename, url: publicUrl } : null
                 };
             })
         );
+
+        const attachments = processedFiles.map(f => f.attachment);
+        const uploadedDocs = processedFiles.map(f => f.dbRecord).filter(r => r !== null);
 
         // Save to DB
         const newApplication = await prisma.creditApplication.create({
