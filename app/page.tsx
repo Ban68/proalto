@@ -4,7 +4,6 @@ import { Contact } from "@/components/sections/contact";
 import { Hero } from "@/components/sections/hero";
 import { Libranzas } from "@/components/sections/libranzas";
 import { Offer } from "@/components/sections/offer";
-import { PaymentMethods } from "@/components/sections/payment-methods";
 import { ProcessSteps } from "@/components/sections/process-steps";
 import { Stats } from "@/components/sections/stats";
 import { Testimonials } from "@/components/sections/testimonials";
@@ -21,7 +20,6 @@ export default function Home() {
       <Libranzas />
       <Stats />
       <Testimonials />
-      <PaymentMethods />
       <Contact />
       <Footer />
     </main>

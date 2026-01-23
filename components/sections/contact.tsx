@@ -22,15 +22,6 @@ export function Contact() {
                     {/* Contact Info */}
                     <div className="space-y-8">
                         <div>
-                            <h3 className="text-[#fec05c] text-xl font-bold mb-2">Oficina</h3>
-                            <p className="text-muted-foreground font-medium">
-                                Calle 24 No. 3 -99 Oficina 909 Edificio 424
-                                <br />
-                                Santa Marta
-                            </p>
-                        </div>
-
-                        <div>
                             <h3 className="text-[#fec05c] text-xl font-bold mb-2">Contáctanos</h3>
                             <p className="text-muted-foreground font-medium mb-1">info@proalto.co</p>
                             <p className="text-muted-foreground font-medium">

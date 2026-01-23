@@ -50,7 +50,7 @@ export function Navbar() {
                 </Link>
 
                 <nav className="hidden md:flex gap-8">
-                    <Link href="/#nosotros" className="text-sm font-medium text-white hover:text-[#fec05c] transition-colors">
+                    <Link href="/nosotros" className="text-sm font-medium text-white hover:text-[#fec05c] transition-colors">
                         Nosotros
                     </Link>
                     <Link href="/credito-libranza" className="text-sm font-medium text-white hover:text-[#fec05c] transition-colors">
@@ -59,7 +59,7 @@ export function Navbar() {
                     <Link href="/libranzas" className="text-sm font-medium text-white hover:text-[#fec05c] transition-colors">
                         Libranzas
                     </Link>
-                    <Link href="/#pagos" className="text-sm font-medium text-white hover:text-[#fec05c] transition-colors">
+                    <Link href="/pagos" className="text-sm font-medium text-white hover:text-[#fec05c] transition-colors">
                         Pago
                     </Link>
                     <Link href="/#contacto" className="text-sm font-medium text-white hover:text-[#fec05c] transition-colors">
