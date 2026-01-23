@@ -313,10 +313,8 @@ export function CreditApplicationForm() {
             <div className="space-y-4 pt-4">
                 <label className="flex items-start gap-3 cursor-pointer">
                     <input type="checkbox" name="creditReportAuth" required className="accent-[#fec05c] w-5 h-5 mt-0.5" />
-                    <span className="text-sm font-bold text-[#fec05c] hover:underline">
-                        <a href="/documents/autorizacion-consulta-reportes.pdf" target="_blank" rel="noopener noreferrer">
-                            Autorización De Consulta Y Reportes De Información.
-                        </a>
+                    <span className="text-sm font-bold text-white">
+                        Autorizo la consulta y reporte de información en centrales de riesgo
                     </span>
                 </label>
                 <label className="flex items-start gap-3 cursor-pointer">

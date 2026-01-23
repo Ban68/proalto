@@ -3,11 +3,13 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, Facebook, Instagram } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -22,11 +24,14 @@ export function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Dark background if scrolled OR if not on home page
+    const shouldShowBackground = isScrolled || pathname !== "/";
+
     return (
         <header
             className={cn(
                 "fixed top-0 z-50 w-full transition-all duration-300",
-                isScrolled
+                shouldShowBackground
                     ? "bg-[#283e52]/95 shadow-md backdrop-blur-sm"
                     : "bg-transparent"
             )}
