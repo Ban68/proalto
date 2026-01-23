@@ -309,6 +309,22 @@ export function CreditApplicationForm() {
                 </div>
             </div>
 
+            {/* Document Upload */}
+            <div className="space-y-2 pt-2">
+                <label htmlFor="documents" className="text-sm font-bold">Cargar Documentos (Opcional)</label>
+                <div className="text-xs text-gray-300 mb-2">
+                    Puedes adjuntar uno o varios archivos: Fotocopia de la cédula, RUT, Certificado laboral, Certificado de ingresos, Cámara de comercio.
+                </div>
+                <input
+                    id="documents"
+                    name="documents"
+                    type="file"
+                    multiple
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    className="flex w-full rounded-md border border-gray-600 bg-[#1a2333] px-3 py-2 text-sm text-white file:border-0 file:bg-[#fec05c] file:text-[#283e52] file:text-sm file:font-medium file:mr-4 file:px-4 file:py-1 file:rounded-full hover:file:bg-[#eeb14e] transition-all cursor-pointer"
+                />
+            </div>
+
             {/* Checkboxes */}
             <div className="space-y-4 pt-4">
                 <label className="flex items-start gap-3 cursor-pointer">

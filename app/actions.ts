@@ -58,6 +58,20 @@ export async function submitApplication(formData: FormData) {
         // Optional: Revalidate admin path if we had one
         revalidatePath("/admin");
 
+        // Process Attachments
+        const documents = formData.getAll("documents") as File[];
+        const attachments = await Promise.all(
+            documents
+                .filter((doc) => doc.size > 0 && doc.name !== "undefined")
+                .map(async (doc) => {
+                    const buffer = Buffer.from(await doc.arrayBuffer());
+                    return {
+                        filename: doc.name,
+                        content: buffer,
+                    };
+                })
+        );
+
         // Send Email Notification
         try {
             const resend = new Resend(process.env.RESEND_API_KEY);
@@ -74,6 +88,7 @@ export async function submitApplication(formData: FormData) {
                     department,
                     id: newApplication.id
                 }),
+                attachments: attachments.length > 0 ? attachments : undefined,
             });
         } catch (emailError) {
             console.error("Failed to send email notification:", emailError);

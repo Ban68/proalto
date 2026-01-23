@@ -196,11 +196,11 @@ export default function LibranzasPage() {
                                 Contactar por WhatsApp
                             </Link>
                             <Link
-                                href="mailto:gerencia@proalto.co"
+                                href="mailto:info@proalto.co"
                                 className="inline-flex h-12 items-center justify-center rounded-full bg-white px-8 text-base font-bold text-[#283e52] shadow-lg hover:bg-gray-100 transition-all hover:scale-105"
                             >
                                 <Handshake className="mr-2 h-5 w-5" />
-                                Escribir a Gerencia
+                                Contacta con nuestros asesores
                             </Link>
                         </div>
                     </FadeIn>
