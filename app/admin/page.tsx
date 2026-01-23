@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import { Download } from "lucide-react";
+
 import Link from "next/link";
+import { ExportButton } from "@/components/admin/export-button";
 
 const prisma = new PrismaClient();
 
@@ -14,6 +15,13 @@ export default async function AdminPage() {
             createdAt: 'desc'
         }
     });
+
+    // Prepare data for export (convert Decimals to numbers)
+    const exportData = applications.map(app => ({
+        ...app,
+        amount: Number(app.amount),
+        monthlyIncome: app.monthlyIncome ? Number(app.monthlyIncome) : null,
+    }));
 
     return (
         <div className="min-h-screen bg-gray-50 p-8">
@@ -30,13 +38,8 @@ export default async function AdminPage() {
                             Ir al Sitio Web
                         </Link>
                         {/* Simple instruction for export */}
-                        <button
-                            className="flex items-center gap-2 bg-[#283e52] text-white px-4 py-2 rounded-lg hover:bg-[#1a2936] transition-colors"
-                            title="Copia y pega la tabla en Excel"
-                        >
-                            <Download className="w-4 h-4" />
-                            Exportar (Copy/Paste)
-                        </button>
+                        {/* Export Component */}
+                        <ExportButton data={exportData} />
                     </div>
                 </div>
 

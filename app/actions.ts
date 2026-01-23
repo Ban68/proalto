@@ -2,6 +2,8 @@
 
 import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { Resend } from "resend";
+import NewApplicationEmail from "@/components/email/new-application-email";
 
 const prisma = new PrismaClient();
 
@@ -32,7 +34,7 @@ export async function submitApplication(formData: FormData) {
     const digitalService = formData.get("digitalService") === "on";
 
     try {
-        await prisma.creditApplication.create({
+        const newApplication = await prisma.creditApplication.create({
             data: {
                 name,
                 identificationType,
@@ -55,6 +57,28 @@ export async function submitApplication(formData: FormData) {
 
         // Optional: Revalidate admin path if we had one
         revalidatePath("/admin");
+
+        // Send Email Notification
+        try {
+            const resend = new Resend(process.env.RESEND_API_KEY);
+            await resend.emails.send({
+                from: 'Proalto <onboarding@resend.dev>', // Should be updated to a verified domain later
+                to: ['analista@proalto.co'],
+                subject: `Nueva Solicitud de Crédito - ${name}`,
+                react: NewApplicationEmail({
+                    name,
+                    amount: Number(amount),
+                    phone,
+                    email,
+                    city,
+                    department,
+                    id: newApplication.id
+                }),
+            });
+        } catch (emailError) {
+            console.error("Failed to send email notification:", emailError);
+            // We don't block the success response if email fails, but we log it
+        }
 
         return { success: true };
     } catch (error) {

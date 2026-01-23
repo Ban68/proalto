@@ -10,12 +10,14 @@
     "postinstall": "npx prisma generate"
   },
   "dependencies": {
+    "@react-email/components": "^1.0.6",
     "clsx": "^2.1.1",
     "framer-motion": "^12.26.2",
     "lucide-react": "^0.562.0",
     "next": "16.1.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "resend": "^6.8.0",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
