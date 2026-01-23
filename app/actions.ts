@@ -66,9 +66,10 @@ export async function submitApplication(formData: FormData) {
             allFiles.map(async ({ file, prefix }) => {
                 const buffer = Buffer.from(await file.arrayBuffer());
 
-                // Filename: [TYPE] - Timestamp - OriginalName
-                const cleanName = file.name.replace(/\s/g, '-');
-                const filename = `[${prefix}]-${Date.now()}-${cleanName}`;
+                // Filename: TYPE_Timestamp_OriginalName
+                // Replace non-alphanumeric chars (except dot/dash) with underscore to be safe for all storage backends
+                const cleanName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+                const filename = `${prefix}_${Date.now()}_${cleanName}`;
 
                 let publicUrl = null;
 
@@ -80,13 +81,18 @@ export async function submitApplication(formData: FormData) {
                         upsert: false
                     });
 
-                if (!error && data) {
+                if (error) {
+                    // Throwing here to be caught by the outer try/catch and returned to UI
+                    // This allows the user to see exactly why it failed (e.g. invalid key, permissions, etc)
+                    console.error("Supabase Upload Error:", error);
+                    throw new Error(`Error subiendo archivo ${file.name}: ${error.message}`);
+                }
+
+                if (data) {
                     const { data: publicUrlData } = supabase.storage
                         .from('applications')
                         .getPublicUrl(filename);
                     publicUrl = publicUrlData.publicUrl;
-                } else {
-                    console.error("Supabase Upload Error:", error);
                 }
 
                 return {
@@ -149,8 +155,8 @@ export async function submitApplication(formData: FormData) {
         }
 
         return { success: true };
-    } catch (error) {
+    } catch (error: any) {
         console.error("Failed to create application:", error);
-        return { success: false, error: "Error al guardar la solicitud en la base de datos." };
+        return { success: false, error: error.message || "Error al guardar la solicitud en la base de datos." };
     }
 }
