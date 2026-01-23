@@ -10,7 +10,7 @@ export function Libranzas() {
                             Libranzas
                         </h2>
                         <p className="text-lg text-muted-foreground leading-relaxed">
-                            La parte de las empresas que permite otorga créditos a sus empleados a tasas competitivas. Promueve de LIBRANZAS, y con ello deja datos para contactarte.
+                            Ofrecemos convenios de libranza para empresas, permitiendo a tus empleados acceder a créditos con tasas preferenciales y descuento directo de nómina. Gestionamos todo el proceso para facilitar el bienestar financiero de tu equipo.
                         </p>
                         <div className="pt-4">
                             <Link
