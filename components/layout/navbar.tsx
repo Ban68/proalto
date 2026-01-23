@@ -56,7 +56,7 @@ export function Navbar() {
                     <Link href="/credito-libranza" className="text-sm font-medium text-white hover:text-[#fec05c] transition-colors">
                         Créditos
                     </Link>
-                    <Link href="/#libranzas" className="text-sm font-medium text-white hover:text-[#fec05c] transition-colors">
+                    <Link href="/libranzas" className="text-sm font-medium text-white hover:text-[#fec05c] transition-colors">
                         Libranzas
                     </Link>
                     <Link href="/#pagos" className="text-sm font-medium text-white hover:text-[#fec05c] transition-colors">

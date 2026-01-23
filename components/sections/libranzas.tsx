@@ -14,10 +14,10 @@ export function Libranzas() {
                         </p>
                         <div className="pt-4">
                             <Link
-                                href="/#contacto"
+                                href="/libranzas"
                                 className="inline-flex h-12 items-center justify-center rounded-md bg-[#fec05c] px-8 text-base font-bold text-[#283e52] shadow transition-colors hover:bg-[#eeb14e]"
                             >
-                                Haz Clic Aquí
+                                Conoce Más
                             </Link>
                         </div>
                     </div>
