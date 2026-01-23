@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "Proalto | Tu Crédito Digital",
   description: "Créditos digitales aprobados en menos de 24 horas.",
   icons: {
-    icon: "/logo.png",
+    icon: "/isologo.jpg",
   },
 };
 
