@@ -40,42 +40,64 @@ export async function submitApplication(formData: FormData) {
 
     try {
         // Process Attachments (Upload to Supabase & Email Attachment)
-        const documents = formData.getAll("documents") as File[];
+        // We now have individual fields: doc_cedula, doc_rut, doc_laboral, doc_ingresos, doc_camara, doc_otros
+        const docFields = [
+            { key: 'doc_cedula', prefix: 'CEDULA' },
+            { key: 'doc_rut', prefix: 'RUT' },
+            { key: 'doc_laboral', prefix: 'LABORAL' },
+            { key: 'doc_ingresos', prefix: 'INGRESOS' },
+            { key: 'doc_camara', prefix: 'CAMARA' },
+            { key: 'doc_otros', prefix: 'OTROS' },
+        ];
+
+        let allFiles: { file: File, prefix: string }[] = [];
+
+        // Gather all files
+        for (const field of docFields) {
+            const files = formData.getAll(field.key) as File[];
+            files.forEach(f => {
+                if (f.size > 0 && f.name !== "undefined") {
+                    allFiles.push({ file: f, prefix: field.prefix });
+                }
+            });
+        }
+
         const uploadedDocs: { name: string; url: string }[] = [];
 
         const attachments = await Promise.all(
-            documents
-                .filter((doc) => doc.size > 0 && doc.name !== "undefined")
-                .map(async (doc) => {
-                    const buffer = Buffer.from(await doc.arrayBuffer());
+            allFiles.map(async ({ file, prefix }) => {
+                const buffer = Buffer.from(await file.arrayBuffer());
 
-                    // Upload to Supabase
-                    const filename = `${Date.now()}-${doc.name.replace(/\s/g, '-')}`;
-                    const { data, error } = await supabase.storage
+                // Upload to Supabase
+                // Filename: [TYPE] - Timestamp - OriginalName
+                const cleanName = file.name.replace(/\s/g, '-');
+                const filename = `[${prefix}]-${Date.now()}-${cleanName}`;
+
+                const { data, error } = await supabase.storage
+                    .from('applications')
+                    .upload(filename, buffer, {
+                        contentType: file.type,
+                        upsert: false
+                    });
+
+                if (!error && data) {
+                    const { data: publicUrlData } = supabase.storage
                         .from('applications')
-                        .upload(filename, buffer, {
-                            contentType: doc.type,
-                            upsert: false
-                        });
+                        .getPublicUrl(filename);
 
-                    if (!error && data) {
-                        const { data: publicUrlData } = supabase.storage
-                            .from('applications')
-                            .getPublicUrl(filename);
+                    uploadedDocs.push({
+                        name: filename, // Storing the full prefixed name so admin knows what it is
+                        url: publicUrlData.publicUrl
+                    });
+                } else {
+                    console.error("Supabase Upload Error:", error);
+                }
 
-                        uploadedDocs.push({
-                            name: doc.name,
-                            url: publicUrlData.publicUrl
-                        });
-                    } else {
-                        console.error("Supabase Upload Error:", error);
-                    }
-
-                    return {
-                        filename: doc.name,
-                        content: buffer,
-                    };
-                })
+                return {
+                    filename: filename, // Send prefixed name in email too
+                    content: buffer,
+                };
+            })
         );
 
         // Save to DB

@@ -309,20 +309,81 @@ export function CreditApplicationForm() {
                 </div>
             </div>
 
-            {/* Document Upload */}
-            <div className="space-y-2 pt-2">
-                <label htmlFor="documents" className="text-sm font-bold">Cargar Documentos (Opcional)</label>
-                <div className="text-xs text-gray-300 mb-2">
-                    Puedes adjuntar uno o varios archivos: Fotocopia de la cédula, RUT, Certificado laboral, Certificado de ingresos, Cámara de comercio.
+            {/* Document Uploads - Individual Fields */}
+            <div className="space-y-4 pt-4 border-t border-gray-700">
+                <h3 className="text-lg font-bold text-[#fec05c]">Cargar Documentos (Opcional)</h3>
+                <p className="text-xs text-gray-300 -mt-3 mb-4">
+                    Sube los documentos disponibles. Puedes completar los faltantes después.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Cédula */}
+                    <div className="space-y-1">
+                        <label className="text-sm font-semibold">Fotocopia de la cédula</label>
+                        <input
+                            name="doc_cedula"
+                            type="file"
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            className="flex w-full rounded-md border border-gray-600 bg-[#1a2333] px-3 py-2 text-sm text-white file:border-0 file:bg-[#fec05c] file:text-[#283e52] file:text-xs file:font-semibold file:mr-2 file:px-2 file:py-1 file:rounded-full hover:file:bg-[#eeb14e] transition-all cursor-pointer"
+                        />
+                    </div>
+
+                    {/* RUT */}
+                    <div className="space-y-1">
+                        <label className="text-sm font-semibold">RUT</label>
+                        <input
+                            name="doc_rut"
+                            type="file"
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            className="flex w-full rounded-md border border-gray-600 bg-[#1a2333] px-3 py-2 text-sm text-white file:border-0 file:bg-[#fec05c] file:text-[#283e52] file:text-xs file:font-semibold file:mr-2 file:px-2 file:py-1 file:rounded-full hover:file:bg-[#eeb14e] transition-all cursor-pointer"
+                        />
+                    </div>
+
+                    {/* Certificado Laboral */}
+                    <div className="space-y-1">
+                        <label className="text-sm font-semibold">Certificado Laboral</label>
+                        <input
+                            name="doc_laboral"
+                            type="file"
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            className="flex w-full rounded-md border border-gray-600 bg-[#1a2333] px-3 py-2 text-sm text-white file:border-0 file:bg-[#fec05c] file:text-[#283e52] file:text-xs file:font-semibold file:mr-2 file:px-2 file:py-1 file:rounded-full hover:file:bg-[#eeb14e] transition-all cursor-pointer"
+                        />
+                    </div>
+
+                    {/* Certificado de Ingresos */}
+                    <div className="space-y-1">
+                        <label className="text-sm font-semibold">Certificado de Ingresos</label>
+                        <input
+                            name="doc_ingresos"
+                            type="file"
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            className="flex w-full rounded-md border border-gray-600 bg-[#1a2333] px-3 py-2 text-sm text-white file:border-0 file:bg-[#fec05c] file:text-[#283e52] file:text-xs file:font-semibold file:mr-2 file:px-2 file:py-1 file:rounded-full hover:file:bg-[#eeb14e] transition-all cursor-pointer"
+                        />
+                    </div>
+
+                    {/* Cámara de Comercio */}
+                    <div className="space-y-1">
+                        <label className="text-sm font-semibold">Cámara de Comercio</label>
+                        <input
+                            name="doc_camara"
+                            type="file"
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            className="flex w-full rounded-md border border-gray-600 bg-[#1a2333] px-3 py-2 text-sm text-white file:border-0 file:bg-[#fec05c] file:text-[#283e52] file:text-xs file:font-semibold file:mr-2 file:px-2 file:py-1 file:rounded-full hover:file:bg-[#eeb14e] transition-all cursor-pointer"
+                        />
+                    </div>
+
+                    {/* Otros */}
+                    <div className="space-y-1">
+                        <label className="text-sm font-semibold">Otros Documentos</label>
+                        <input
+                            name="doc_otros"
+                            type="file"
+                            multiple
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            className="flex w-full rounded-md border border-gray-600 bg-[#1a2333] px-3 py-2 text-sm text-white file:border-0 file:bg-[#fec05c] file:text-[#283e52] file:text-xs file:font-semibold file:mr-2 file:px-2 file:py-1 file:rounded-full hover:file:bg-[#eeb14e] transition-all cursor-pointer"
+                        />
+                    </div>
                 </div>
-                <input
-                    id="documents"
-                    name="documents"
-                    type="file"
-                    multiple
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    className="flex w-full rounded-md border border-gray-600 bg-[#1a2333] px-3 py-2 text-sm text-white file:border-0 file:bg-[#fec05c] file:text-[#283e52] file:text-sm file:font-medium file:mr-4 file:px-4 file:py-1 file:rounded-full hover:file:bg-[#eeb14e] transition-all cursor-pointer"
-                />
             </div>
 
             {/* Checkboxes */}
