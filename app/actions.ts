@@ -3,9 +3,14 @@
 import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
+import { createClient } from "@supabase/supabase-js";
 import NewApplicationEmail from "@/components/email/new-application-email";
 
 const prisma = new PrismaClient();
+const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 export async function submitApplication(formData: FormData) {
     // Extract basic fields
@@ -34,6 +39,46 @@ export async function submitApplication(formData: FormData) {
     const digitalService = formData.get("digitalService") === "on";
 
     try {
+        // Process Attachments (Upload to Supabase & Email Attachment)
+        const documents = formData.getAll("documents") as File[];
+        const uploadedDocs: { name: string; url: string }[] = [];
+
+        const attachments = await Promise.all(
+            documents
+                .filter((doc) => doc.size > 0 && doc.name !== "undefined")
+                .map(async (doc) => {
+                    const buffer = Buffer.from(await doc.arrayBuffer());
+
+                    // Upload to Supabase
+                    const filename = `${Date.now()}-${doc.name.replace(/\s/g, '-')}`;
+                    const { data, error } = await supabase.storage
+                        .from('applications')
+                        .upload(filename, buffer, {
+                            contentType: doc.type,
+                            upsert: false
+                        });
+
+                    if (!error && data) {
+                        const { data: publicUrlData } = supabase.storage
+                            .from('applications')
+                            .getPublicUrl(filename);
+
+                        uploadedDocs.push({
+                            name: doc.name,
+                            url: publicUrlData.publicUrl
+                        });
+                    } else {
+                        console.error("Supabase Upload Error:", error);
+                    }
+
+                    return {
+                        filename: doc.name,
+                        content: buffer,
+                    };
+                })
+        );
+
+        // Save to DB
         const newApplication = await prisma.creditApplication.create({
             data: {
                 name,
@@ -52,25 +97,12 @@ export async function submitApplication(formData: FormData) {
                 employmentType,
                 monthlyIncome: Number(monthlyIncome),
                 digitalService,
+                documents: uploadedDocs, // Save JSON array
             },
         });
 
         // Optional: Revalidate admin path if we had one
         revalidatePath("/admin");
-
-        // Process Attachments
-        const documents = formData.getAll("documents") as File[];
-        const attachments = await Promise.all(
-            documents
-                .filter((doc) => doc.size > 0 && doc.name !== "undefined")
-                .map(async (doc) => {
-                    const buffer = Buffer.from(await doc.arrayBuffer());
-                    return {
-                        filename: doc.name,
-                        content: buffer,
-                    };
-                })
-        );
 
         // Send Email Notification
         try {

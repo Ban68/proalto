@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 import Link from "next/link";
 import { ExportButton } from "@/components/admin/export-button";
+import { Download } from "lucide-react";
 
 const prisma = new PrismaClient();
 
@@ -90,6 +91,27 @@ export default async function AdminPage() {
                                         <td className="px-6 py-4 text-gray-900">
                                             ${app.monthlyIncome ? Number(app.monthlyIncome).toLocaleString('es-CO') : '-'}
                                         </td>
+                                        <td className="px-6 py-4">
+                                            {Array.isArray(app.documents) && (app.documents as any[]).length > 0 ? (
+                                                <div className="flex flex-col gap-2">
+                                                    {(app.documents as any[]).map((doc, idx) => (
+                                                        <a
+                                                            key={idx}
+                                                            href={doc.url}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 hover:underline"
+                                                            title={doc.name}
+                                                        >
+                                                            <Download className="w-3 h-3" />
+                                                            <span className="truncate max-w-[100px]">{doc.name}</span>
+                                                        </a>
+                                                    ))}
+                                                </div>
+                                            ) : (
+                                                <span className="text-xs text-gray-400">-</span>
+                                            )}
+                                        </td>
                                     </tr>
                                 ))}
                                 {applications.length === 0 && (
@@ -104,6 +126,6 @@ export default async function AdminPage() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
