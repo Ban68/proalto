@@ -24,10 +24,10 @@ export default function LibranzasPage() {
                     <FadeIn>
                         <div className="max-w-3xl mx-auto text-center space-y-6">
                             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                                Transforme el bienestar financiero de sus <span className="text-[#fec05c]">empleados</span>
+                                Transforma el bienestar financiero de tus <span className="text-[#fec05c]">empleados</span>
                             </h1>
                             <p className="text-xl text-gray-300 leading-relaxed">
-                                Conviértase en un aliado estratégico. Ofrezca créditos por libranza con tasas preferenciales, sin costos administrativos ni riesgos para su empresa.
+                                Conviértete en un aliado estratégico. Ofrece créditos por libranza con tasas preferenciales, sin costos administrativos ni riesgos para tu empresa.
                             </p>
                             <div className="pt-8 flex justify-center gap-4">
                                 <Link
@@ -65,7 +65,7 @@ export default function LibranzasPage() {
                                     Productividad y Retención
                                 </h3>
                                 <p className="text-gray-600 leading-relaxed">
-                                    El estrés financiero es una de las principales causas de distracción laboral. Al ofrecer soluciones de liquidez ágiles, usted mejora el clima organizacional, reduce la rotación y aumenta el enfoque de su equipo.
+                                    El estrés financiero es una de las principales causas de distracción laboral. Al ofrecer soluciones de liquidez ágiles, mejoras el clima organizacional, reduces la rotación y aumentas el enfoque de tu equipo.
                                 </p>
                             </div>
                         </FadeIn>
@@ -80,7 +80,7 @@ export default function LibranzasPage() {
                                     Cero Costo y Cero Riesgo
                                 </h3>
                                 <p className="text-gray-600 leading-relaxed">
-                                    Su empresa no asume ninguna responsabilidad por el pago del crédito ni incurre en costos. Proalto asume el 100% del riesgo crediticio. Su rol se limita a facilitar el descuento de nómina.
+                                    Tu empresa no asume ninguna responsabilidad por el pago del crédito ni incurre en costos. Proalto asume el 100% del riesgo crediticio. Tu rol se limita a facilitar el descuento de nómina.
                                 </p>
                             </div>
                         </FadeIn>
@@ -95,7 +95,7 @@ export default function LibranzasPage() {
                                     Gestión 100% Digital
                                 </h3>
                                 <p className="text-gray-600 leading-relaxed">
-                                    No cargamos a su departamento de RRHH con papeleo. Nuestro proceso es digital, eficiente y transparente, minimizando la operatividad para su equipo administrativo.
+                                    No cargamos a tu departamento de RRHH con papeleo. Nuestro proceso es digital, eficiente y transparente, minimizando la operatividad para tu equipo administrativo.
                                 </p>
                             </div>
                         </FadeIn>
@@ -175,10 +175,10 @@ export default function LibranzasPage() {
                 <div className="container text-center">
                     <FadeIn direction="up">
                         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-6">
-                            ¿Listo para potenciar su empresa?
+                            ¿Listo para potenciar tu empresa?
                         </h2>
                         <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-10">
-                            Hablemos hoy mismo. Un asesor corporativo está listo para presentarle nuestra propuesta de convenio a medida.
+                            Hablemos hoy mismo. Un asesor corporativo está listo para presentarte nuestra propuesta de convenio a medida.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-6 justify-center">
                             <Link
