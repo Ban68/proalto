@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   description: "Créditos digitales aprobados en menos de 24 horas.",
   icons: {
     icon: "/isologo.jpg",
+    shortcut: "/isologo.jpg",
+    apple: "/isologo.jpg",
   },
 };
 
