@@ -92,7 +92,7 @@ export function CreditApplicationForm() {
     }
 
     return (
-        <form onSubmit={onSubmit} className="space-y-8 bg-[#0B1221] p-8 rounded-3xl text-white shadow-2xl">
+        <form onSubmit={onSubmit} className="space-y-8 bg-[#283e52] p-8 rounded-3xl text-white shadow-2xl">
 
             {/* Row 1 */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -328,17 +328,6 @@ export function CreditApplicationForm() {
                         />
                     </div>
 
-                    {/* RUT */}
-                    <div className="space-y-1">
-                        <label className="text-sm font-semibold">RUT</label>
-                        <input
-                            name="doc_rut"
-                            type="file"
-                            accept=".pdf,.jpg,.jpeg,.png"
-                            className="flex w-full rounded-md border border-gray-600 bg-[#1a2333] px-3 py-2 text-sm text-white file:border-0 file:bg-[#fec05c] file:text-[#283e52] file:text-xs file:font-semibold file:mr-2 file:px-2 file:py-1 file:rounded-full hover:file:bg-[#eeb14e] transition-all cursor-pointer"
-                        />
-                    </div>
-
                     {/* Certificado Laboral */}
                     <div className="space-y-1">
                         <label className="text-sm font-semibold">Certificado Laboral</label>
@@ -355,17 +344,6 @@ export function CreditApplicationForm() {
                         <label className="text-sm font-semibold">Certificado de Ingresos</label>
                         <input
                             name="doc_ingresos"
-                            type="file"
-                            accept=".pdf,.jpg,.jpeg,.png"
-                            className="flex w-full rounded-md border border-gray-600 bg-[#1a2333] px-3 py-2 text-sm text-white file:border-0 file:bg-[#fec05c] file:text-[#283e52] file:text-xs file:font-semibold file:mr-2 file:px-2 file:py-1 file:rounded-full hover:file:bg-[#eeb14e] transition-all cursor-pointer"
-                        />
-                    </div>
-
-                    {/* Cámara de Comercio */}
-                    <div className="space-y-1">
-                        <label className="text-sm font-semibold">Cámara de Comercio</label>
-                        <input
-                            name="doc_camara"
                             type="file"
                             accept=".pdf,.jpg,.jpeg,.png"
                             className="flex w-full rounded-md border border-gray-600 bg-[#1a2333] px-3 py-2 text-sm text-white file:border-0 file:bg-[#fec05c] file:text-[#283e52] file:text-xs file:font-semibold file:mr-2 file:px-2 file:py-1 file:rounded-full hover:file:bg-[#eeb14e] transition-all cursor-pointer"
@@ -439,7 +417,7 @@ export function CreditApplicationForm() {
             </div>
 
             <p className="text-sm text-center text-gray-300 mt-6 leading-relaxed max-w-3xl mx-auto">
-                Para agilizar tu solicitud envíanos al correo <a href="mailto:servicioalcliente@proalto.co" className="text-[#fec05c] underline">servicioalcliente@proalto.co</a> fotocopia de tu cédula, RUT, certificación de tus ingresos y cámara de comercio.
+                Para agilizar tu solicitud envíanos al correo <a href="mailto:servicioalcliente@proalto.co" className="text-[#fec05c] underline">servicioalcliente@proalto.co</a> fotocopia de tu cédula y certificación de tus ingresos.
             </p>
         </form>
     );

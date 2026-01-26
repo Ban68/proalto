@@ -42,10 +42,8 @@ export async function submitApplication(formData: FormData) {
         // Process Attachments (Upload to Supabase & Email Attachment)
         const docFields = [
             { key: 'doc_cedula', prefix: 'CEDULA' },
-            { key: 'doc_rut', prefix: 'RUT' },
             { key: 'doc_laboral', prefix: 'LABORAL' },
             { key: 'doc_ingresos', prefix: 'INGRESOS' },
-            { key: 'doc_camara', prefix: 'CAMARA' },
             { key: 'doc_otros', prefix: 'OTROS' },
         ];
 
