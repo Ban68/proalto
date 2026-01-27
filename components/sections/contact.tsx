@@ -45,7 +45,7 @@ export function Contact() {
                             <h3 className="text-[#fec05c] text-xl font-bold mb-2">Contáctanos</h3>
                             <p className="text-muted-foreground font-medium mb-1">info@proalto.co</p>
                             <p className="text-muted-foreground font-medium">
-                                Celulares: 3203454201 - 3114121467
+                                Celulares: 3145248483
                             </p>
                         </div>
 

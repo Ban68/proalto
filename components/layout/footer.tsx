@@ -9,7 +9,7 @@ export function Footer() {
                     <div className="space-y-4">
                         <h3 className="text-2xl font-bold">Proalto</h3>
                         <p className="text-primary-foreground/80">
-                            Soluciones financieras ágiles y transparentes para empleados y pensionados.
+                            Soluciones financieras ágiles y transparentes para empleados.
                         </p>
                     </div>
 
@@ -28,7 +28,7 @@ export function Footer() {
                         <ul className="space-y-3">
                             <li className="flex items-center gap-2">
                                 <Phone className="h-5 w-5 shrink-0" />
-                                <span>+57 (320) 3454201</span>
+                                <span>+57 314 524 8483</span>
                             </li>
                             <li className="flex items-center gap-2">
                                 <Mail className="h-5 w-5 shrink-0" />
