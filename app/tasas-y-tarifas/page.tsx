@@ -36,7 +36,7 @@ export default function TasasPage() {
                         {/* Libre Inversión */}
                         <RateCard
                             title="Libre Inversión"
-                            rate="33.27%"
+                            rate="24.36%"
                             period="E.A. (Efectivo Anual)"
                             icon={<TrendingUp className="w-8 h-8 text-white" />}
                             description="Tasa fija para créditos de consumo y libranzas generales."
