@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 import NewApplicationEmail from "@/components/email/new-application-email";
+import ContactEmail from "@/components/email/contact-email";
 
 const prisma = new PrismaClient();
 const supabase = createClient(
@@ -156,5 +157,36 @@ export async function submitApplication(formData: FormData) {
     } catch (error: any) {
         console.error("Failed to create application:", error);
         return { success: false, error: error.message || "Error al guardar la solicitud en la base de datos." };
+    }
+}
+
+export async function submitContactForm(formData: FormData) {
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const message = formData.get("message") as string;
+
+    if (!name || !email || !message) {
+        return { success: false, error: "Por favor completa todos los campos." };
+    }
+
+    try {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        // Note: Sending to proalto.co@gmail.com as requested for testing
+        // This will only work if proalto.co@gmail.com is the account owner or verified domain
+        await resend.emails.send({
+            from: 'Proalto Contacto <onboarding@resend.dev>',
+            to: ['proalto.co@gmail.com'],
+            subject: `Nuevo Mensaje de Contacto - ${name}`,
+            react: ContactEmail({
+                name,
+                email,
+                message,
+            }),
+        });
+
+        return { success: true };
+    } catch (error: any) {
+        console.error("Failed to send contact email:", error);
+        return { success: false, error: "Error al enviar el mensaje. Inténtalo más tarde." };
     }
 }
