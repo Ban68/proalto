@@ -2,6 +2,7 @@ import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { Percent, TrendingUp, Store, FileText, Info } from "lucide-react";
 import Link from "next/link";
+import { LoanSimulator } from "@/components/calculators/loan-simulator";
 
 export default function TasasPage() {
     return (
@@ -114,6 +115,9 @@ export default function TasasPage() {
                         </div>
                     </div>
                 </section>
+
+                {/* Simulator Section */}
+                <LoanSimulator />
 
                 <div className="text-center text-xs text-gray-400 max-w-2xl mx-auto">
                     * Proalto vigila el cumplimiento de las tasas máximas de usura certificadas por la Superintendencia Financiera de Colombia para cada modalidad de crédito.

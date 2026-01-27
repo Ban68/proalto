@@ -1,0 +1,174 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { Calculator, DollarSign, Calendar, Info, ChevronRight, RefreshCw } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const RATE_EA = 0.2436; // 24.36% E.A.
+const RISK_FUND_PCT = 0.10; // 10%
+const SIGNATURE_COST = 20000; // $20,000 fixed
+const INSURANCE_PCT = 0.004; // 0.4%
+
+export function LoanSimulator() {
+    const [amount, setAmount] = useState<number>(1000000);
+    const [term, setTerm] = useState<number>(12);
+    const [breakdown, setBreakdown] = useState<any>(null);
+
+    // Format currency
+    const formatCurrency = (value: number) => {
+        return new Intl.NumberFormat('es-CO', {
+            style: 'currency',
+            currency: 'COP',
+            maximumFractionDigits: 0
+        }).format(value);
+    };
+
+    const calculateLoan = () => {
+        if (!amount || !term) return;
+
+        // 1. Monthly Rate Calculation
+        // Formula: (1 + EA)^(1/12) - 1
+        const monthlyRate = Math.pow(1 + RATE_EA, 1 / 12) - 1;
+
+        // 2. Base Monthly Installment (Amortization)
+        // Formula: P * (r * (1+r)^n) / ((1+r)^n - 1)
+        const baseInstallment = amount * (monthlyRate * Math.pow(1 + monthlyRate, term)) / (Math.pow(1 + monthlyRate, term) - 1);
+
+        // 3. Additional Costs (Monthly portions)
+
+        // Fondo de Riesgo (10% of Amount / Term)
+        const riskFundTotal = amount * RISK_FUND_PCT;
+        const riskFundMonthly = riskFundTotal / term;
+
+        // Firma Electrónica ($20,000 / Term)
+        const signatureMonthly = SIGNATURE_COST / term;
+
+        // Seguro de Vida (0.4% of Amount - FIXED based on initial capital as per request)
+        const insuranceMonthly = amount * INSURANCE_PCT;
+
+        // Total Monthly Payment
+        const totalMonthlyPayment = baseInstallment + riskFundMonthly + signatureMonthly + insuranceMonthly;
+
+        setBreakdown({
+            monthlyRate: (monthlyRate * 100).toFixed(2),
+            baseInstallment,
+            riskFundMonthly,
+            signatureMonthly,
+            insuranceMonthly,
+            totalMonthlyPayment
+        });
+    };
+
+    useEffect(() => {
+        calculateLoan();
+    }, [amount, term]);
+
+    return (
+        <section className="py-16 bg-white" id="simulador">
+            <div className="container max-w-5xl mx-auto px-4">
+                <div className="text-center mb-12">
+                    <span className="text-[#fec05c] font-bold tracking-widest uppercase text-sm mb-2 block">
+                        Planea tu futuro
+                    </span>
+                    <h2 className="text-3xl font-bold text-[#283e52]">Simulador de Crédito</h2>
+                    <p className="text-gray-500 mt-2">Calcula tu cuota mensual aproximada incluyendo todos los costos.</p>
+                </div>
+
+                <div className="grid lg:grid-cols-12 gap-8 bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+
+                    {/* Controls Section */}
+                    <div className="lg:col-span-7 p-8 md:p-10 space-y-8">
+                        <div>
+                            <label className="block text-sm font-bold text-[#283e52] mb-4 flex items-center justify-between">
+                                <span className="flex items-center gap-2"><DollarSign className="w-4 h-4 text-[#fec05c]" /> Monto a Solicitar</span>
+                                <span className="text-2xl font-bold text-[#283e52]">{formatCurrency(amount)}</span>
+                            </label>
+                            <input
+                                type="range"
+                                min="500000"
+                                max="20000000"
+                                step="100000"
+                                value={amount}
+                                onChange={(e) => setAmount(Number(e.target.value))}
+                                className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#283e52]"
+                            />
+                            <div className="flex justify-between text-xs text-gray-400 mt-2 font-medium">
+                                <span>$500.000</span>
+                                <span>$20.000.000</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-bold text-[#283e52] mb-4 flex items-center justify-between">
+                                <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-[#fec05c]" /> Plazo (Meses)</span>
+                                <span className="text-2xl font-bold text-[#283e52]">{term} Meses</span>
+                            </label>
+                            <input
+                                type="range"
+                                min="6"
+                                max="60"
+                                step="1"
+                                value={term}
+                                onChange={(e) => setTerm(Number(e.target.value))}
+                                className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#283e52]"
+                            />
+                            <div className="flex justify-between text-xs text-gray-400 mt-2 font-medium">
+                                <span>6 Meses</span>
+                                <span>60 Meses</span>
+                            </div>
+                        </div>
+
+                        <div className="bg-blue-50/50 rounded-xl p-6 border border-blue-100">
+                            <h4 className="font-bold text-[#283e52] mb-4 flex items-center gap-2 text-sm">
+                                <Info className="w-4 h-4 text-[#fec05c]" />
+                                Desglose de Costos (Estimado Mensual)
+                            </h4>
+                            <div className="space-y-3 text-sm">
+                                <div className="flex justify-between text-gray-600">
+                                    <span>Capital e Intereses ({breakdown?.monthlyRate}% M.V.)</span>
+                                    <span className="font-semibold">{formatCurrency(breakdown?.baseInstallment || 0)}</span>
+                                </div>
+                                <div className="flex justify-between text-gray-600">
+                                    <span>Fondo de Riesgo (Diferido)</span>
+                                    <span className="font-semibold">{formatCurrency(breakdown?.riskFundMonthly || 0)}</span>
+                                </div>
+                                <div className="flex justify-between text-gray-600">
+                                    <span>Firma Electrónica (Diferido)</span>
+                                    <span className="font-semibold">{formatCurrency(breakdown?.signatureMonthly || 0)}</span>
+                                </div>
+                                <div className="flex justify-between text-gray-600">
+                                    <span>Seguro de Vida</span>
+                                    <span className="font-semibold">{formatCurrency(breakdown?.insuranceMonthly || 0)}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Result Section */}
+                    <div className="lg:col-span-5 bg-[#283e52] p-8 md:p-10 flex flex-col justify-center text-white relative overflow-hidden">
+                        {/* Background decoration */}
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-[#fec05c]/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
+                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#fff]/5 rounded-full blur-2xl -ml-10 -mb-10"></div>
+
+                        <div className="relative z-10 text-center">
+                            <p className="text-blue-200 font-medium mb-2 tracking-wide text-sm uppercase">Cuota Mensual Aproximada</p>
+                            <div className="text-5xl md:text-6xl font-extrabold mb-2 tracking-tight">
+                                {formatCurrency(breakdown?.totalMonthlyPayment || 0)}
+                            </div>
+                            <p className="text-xs text-blue-300 mb-8 max-w-xs mx-auto opacity-80">
+                                * Valor aproximado. Sujeto a estudio de crédito y condiciones finales.
+                            </p>
+
+                            <a
+                                href="/formulario-de-registro"
+                                className="inline-flex items-center justify-center gap-2 bg-[#fec05c] hover:bg-[#eeb14e] text-[#283e52] font-bold py-4 px-8 rounded-xl transition-all w-full shadow-lg shadow-[#fec05c]/20 hover:shadow-[#fec05c]/40 hover:-translate-y-1"
+                            >
+                                Solicitar Este Crédito <ChevronRight className="w-5 h-5" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
