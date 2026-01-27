@@ -25,32 +25,25 @@ export default function TasasPage() {
 
             <div className="flex-grow container max-w-5xl mx-auto py-20 px-4 space-y-20">
 
-                {/* Tasas de Interés Cards */}
+                {/* Tasa de Interés Vigente Card */}
                 <section>
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-[#283e52] mb-4">Tasas de Interés Vigentes</h2>
-                        <p className="text-muted-foreground">Aplicables para el mes en curso, sujetas a los límites de la Superfinanciera.</p>
+                        <h2 className="text-3xl font-bold text-[#283e52] mb-4">Tasa de Interés Vigente</h2>
+                        <p className="text-muted-foreground">Aplicable para el mes en curso, sujeta a los límites de la Superfinanciera.</p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div className="flex justify-center max-w-4xl mx-auto">
                         {/* Libre Inversión */}
-                        <RateCard
-                            title="Libre Inversión"
-                            rate="24.36%"
-                            period="E.A. (Efectivo Anual)"
-                            icon={<TrendingUp className="w-8 h-8 text-white" />}
-                            description="Tasa fija para créditos de consumo y libranzas generales."
-                        />
-
-                        {/* Microcrédito */}
-                        <RateCard
-                            title="Microcrédito"
-                            rate="58.80%"
-                            period="E.A. (3.93% Mes Vencido)"
-                            icon={<Store className="w-8 h-8 text-white" />}
-                            description="Tasa especializada para impulso de micronegocios y emprendimientos."
-                            highlight
-                        />
+                        <div className="w-full max-w-md">
+                            <RateCard
+                                title="Libre Inversión"
+                                rate="24.36%"
+                                period="E.A. (Efectivo Anual)"
+                                icon={<TrendingUp className="w-8 h-8 text-white" />}
+                                description="Tasa fija para créditos de consumo y libranzas generales."
+                                highlight
+                            />
+                        </div>
                     </div>
                 </section>
 
