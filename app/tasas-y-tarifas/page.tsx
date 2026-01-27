@@ -47,17 +47,12 @@ export default function TasasPage() {
                         </div>
 
                         {/* Decorative Image */}
-                        <div className="relative h-full min-h-[400px] w-full rounded-3xl overflow-hidden shadow-2xl">
+                        <div className="hidden md:block w-full h-[400px] relative pointer-events-none select-none">
                             <img
                                 src="/tasas_y_tarifas_illustration.png"
                                 alt="Crecimiento Financiero"
-                                className="object-cover w-full h-full"
+                                className="object-contain w-full h-full mix-blend-multiply opacity-90 drop-shadow-2xl"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#283e52]/80 to-transparent"></div>
-                            <div className="absolute bottom-8 left-8 right-8 text-white">
-                                <p className="font-bold text-lg mb-2">Transparencia Total</p>
-                                <p className="text-sm text-gray-200">Sin letras chiquitas ni costos ocultos. Tu tranquilidad financiera es nuestra prioridad.</p>
-                            </div>
                         </div>
                     </div>
                 </section>
