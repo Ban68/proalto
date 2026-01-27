@@ -24,22 +24,23 @@ export function Hero() {
                     </FadeIn>
 
                     <FadeIn delay={0.4} direction="up">
-                        <Link
-                            href="/formulario-de-registro"
-                            className="inline-flex h-14 items-center justify-center rounded-md bg-[#fec05c] px-8 text-lg font-bold text-[#283e52] shadow-lg transition-transform hover:scale-105 hover:bg-[#eeb14e]"
-                        >
-                            ¡Solicítalo YA!
-                        </Link>
-                        <Link
-                            href="/tasas-y-tarifas#simulador"
-                            className="inline-flex h-14 items-center justify-center rounded-md border-2 border-white px-8 text-lg font-bold text-white shadow-lg transition-all hover:bg-white/10 hover:scale-105"
-                        >
-                            Simular Crédito
-                        </Link>
+                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                            <Link
+                                href="/formulario-de-registro"
+                                className="inline-flex h-14 items-center justify-center rounded-md bg-[#fec05c] px-8 text-lg font-bold text-[#283e52] shadow-lg transition-transform hover:scale-105 hover:bg-[#eeb14e]"
+                            >
+                                ¡Solicítalo YA!
+                            </Link>
+                            <Link
+                                href="/tasas-y-tarifas#simulador"
+                                className="inline-flex h-14 items-center justify-center rounded-md border-2 border-white px-8 text-lg font-bold text-white shadow-lg transition-all hover:bg-white/10 hover:scale-105"
+                            >
+                                Simular Crédito
+                            </Link>
+                        </div>
+                    </FadeIn>
                 </div>
-            </FadeIn>
-        </div>
-            </div >
-        </section >
+            </div>
+        </section>
     );
 }
