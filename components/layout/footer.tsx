@@ -40,7 +40,7 @@ export function Footer() {
                     <div>
                         <h4 className="font-semibold text-lg mb-4">Legal</h4>
                         <ul className="space-y-2">
-                            <li><Link href="#" className="hover:text-secondary transition-colors">Términos y Condiciones</Link></li>
+                            <li><Link href="/documents/terminos-y-condiciones.pdf" className="hover:text-secondary transition-colors" target="_blank" rel="noopener noreferrer">Términos y Condiciones</Link></li>
                             <li><Link href="/documents/politica-tratamiento-datos.pdf" className="hover:text-secondary transition-colors" target="_blank" rel="noopener noreferrer">Política de Tratamiento de Datos</Link></li>
                             <li><Link href="/tasas-y-tarifas" className="hover:text-secondary transition-colors">Tasas y Tarifas</Link></li>
                         </ul>
