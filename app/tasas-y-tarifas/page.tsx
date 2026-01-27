@@ -32,9 +32,10 @@ export default function TasasPage() {
                         <p className="text-muted-foreground">Aplicable para el mes en curso, sujeta a los límites de la Superfinanciera.</p>
                     </div>
 
-                    <div className="flex justify-center max-w-4xl mx-auto">
+                    <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+
                         {/* Libre Inversión */}
-                        <div className="w-full max-w-md">
+                        <div className="w-full">
                             <RateCard
                                 title="Libre Inversión"
                                 rate="24.36%"
@@ -43,6 +44,20 @@ export default function TasasPage() {
                                 description="Tasa fija para créditos de consumo y libranzas generales."
                                 highlight
                             />
+                        </div>
+
+                        {/* Decorative Image */}
+                        <div className="relative h-full min-h-[400px] w-full rounded-3xl overflow-hidden shadow-2xl">
+                            <img
+                                src="/tasas_y_tarifas_illustration.png"
+                                alt="Crecimiento Financiero"
+                                className="object-cover w-full h-full"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#283e52]/80 to-transparent"></div>
+                            <div className="absolute bottom-8 left-8 right-8 text-white">
+                                <p className="font-bold text-lg mb-2">Transparencia Total</p>
+                                <p className="text-sm text-gray-200">Sin letras chiquitas ni costos ocultos. Tu tranquilidad financiera es nuestra prioridad.</p>
+                            </div>
                         </div>
                     </div>
                 </section>
