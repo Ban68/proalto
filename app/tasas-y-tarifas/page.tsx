@@ -32,27 +32,38 @@ export default function TasasPage() {
                         <p className="text-muted-foreground">Aplicable para el mes en curso, sujeta a los límites de la Superfinanciera.</p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+                    <div className="max-w-5xl mx-auto">
+                        <div className="relative bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 overflow-hidden">
+                            {/* Decoration */}
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full -mr-20 -mt-20 blur-3xl opacity-50"></div>
 
-                        {/* Libre Inversión */}
-                        <div className="w-full">
-                            <RateCard
-                                title="Libre Inversión"
-                                rate="24.36%"
-                                period="E.A. (Efectivo Anual)"
-                                icon={<TrendingUp className="w-8 h-8 text-white" />}
-                                description="Tasa fija para créditos de consumo y libranzas generales."
-                                highlight
-                            />
-                        </div>
+                            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+                                {/* Left Content */}
+                                <div className="flex-1 text-center md:text-left">
+                                    <div className="inline-flex p-3 rounded-2xl mb-6 bg-[#283e52] text-white shadow-lg">
+                                        <TrendingUp className="w-8 h-8" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-[#283e52] mb-2">Libre Inversión</h3>
+                                    <div className="mb-2">
+                                        <span className="text-5xl md:text-6xl font-extrabold tracking-tight text-[#283e52]">24.36%</span>
+                                    </div>
+                                    <p className="text-lg font-medium text-[#fec05c] mb-6">E.A. (Efectivo Anual)</p>
+                                    <p className="text-gray-600 leading-relaxed text-lg max-w-md">
+                                        Tasa fija para créditos de consumo y libranzas generales. Sin costos ocultos.
+                                    </p>
+                                </div>
 
-                        {/* Decorative Image */}
-                        <div className="hidden md:block w-full h-[400px] relative pointer-events-none select-none">
-                            <img
-                                src="/tasas_y_tarifas_illustration.png"
-                                alt="Crecimiento Financiero"
-                                className="object-contain w-full h-full mix-blend-multiply opacity-90 drop-shadow-2xl"
-                            />
+                                {/* Right Image */}
+                                <div className="flex-1 w-full flex justify-center md:justify-end">
+                                    <div className="w-full max-w-[400px] h-[300px] relative pointer-events-none select-none">
+                                        <img
+                                            src="/tasas_y_tarifas_illustration.png"
+                                            alt="Crecimiento Financiero"
+                                            className="object-contain w-full h-full mix-blend-multiply drop-shadow-xl"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
