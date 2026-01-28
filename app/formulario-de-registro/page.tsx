@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { CreditApplicationForm } from "@/components/forms/credit-application-form";
@@ -16,7 +17,9 @@ export default function RegisterPage() {
                     </div>
 
                     <div className="bg-card p-6 rounded-lg border shadow-sm">
-                        <CreditApplicationForm />
+                        <Suspense fallback={<div className="p-8 text-center">Cargando formulario...</div>}>
+                            <CreditApplicationForm />
+                        </Suspense>
                     </div>
                 </div>
             </main>

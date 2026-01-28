@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -25,8 +26,32 @@ export function CreditApplicationForm() {
     // Controlled Inputs
     const [selectedDept, setSelectedDept] = useState("");
     const [amount, setAmount] = useState("");
+    const [term, setTerm] = useState(""); // Add term state
     const [monthlyIncome, setMonthlyIncome] = useState("");
     const [phone, setPhone] = useState("");
+
+    // Auto-fill from URL params (Simulator)
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        const amountParam = searchParams.get('amount');
+        const termParam = searchParams.get('term');
+
+        if (amountParam && !amount) {
+            // Format incoming number to currency string
+            const formattedAmount = new Intl.NumberFormat("es-CO", {
+                style: "currency",
+                currency: "COP",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+            }).format(Number(amountParam));
+            setAmount(formattedAmount);
+        }
+
+        if (termParam && !term) {
+            setTerm(termParam);
+        }
+    }, [searchParams]);
 
     // Handle Department Change
     const handleDeptChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -278,6 +303,8 @@ export function CreditApplicationForm() {
                         name="term"
                         type="number"
                         required
+                        value={term}
+                        onChange={(e) => setTerm(e.target.value)}
                         className="flex h-10 w-full rounded-md border-none bg-white px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:ring-2 focus:ring-[#fec05c]"
                         placeholder="Plazo (en meses)"
                     />

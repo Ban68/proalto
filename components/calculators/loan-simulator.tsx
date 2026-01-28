@@ -81,7 +81,17 @@ export function LoanSimulator() {
                         <div>
                             <label className="block text-sm font-bold text-[#283e52] mb-4 flex items-center justify-between">
                                 <span className="flex items-center gap-2"><DollarSign className="w-4 h-4 text-[#fec05c]" /> Monto a Solicitar</span>
-                                <span className="text-2xl font-bold text-[#283e52]">{formatCurrency(amount)}</span>
+                                <div className="relative">
+                                    <input
+                                        type="number"
+                                        min="500000"
+                                        max="20000000"
+                                        step="100000"
+                                        value={amount}
+                                        onChange={(e) => setAmount(Number(e.target.value))}
+                                        className="text-2xl font-bold text-[#283e52] text-right w-48 border-b-2 border-gray-200 focus:border-[#fec05c] outline-none transition-colors bg-transparent p-1"
+                                    />
+                                </div>
                             </label>
                             <input
                                 type="range"
@@ -106,7 +116,7 @@ export function LoanSimulator() {
                             <input
                                 type="range"
                                 min="6"
-                                max="60"
+                                max="36"
                                 step="1"
                                 value={term}
                                 onChange={(e) => setTerm(Number(e.target.value))}
@@ -114,7 +124,7 @@ export function LoanSimulator() {
                             />
                             <div className="flex justify-between text-xs text-gray-400 mt-2 font-medium">
                                 <span>6 Meses</span>
-                                <span>60 Meses</span>
+                                <span>36 Meses</span>
                             </div>
                         </div>
 
@@ -160,7 +170,7 @@ export function LoanSimulator() {
                             </p>
 
                             <a
-                                href="/formulario-de-registro"
+                                href={`/formulario-de-registro?amount=${amount}&term=${term}`}
                                 className="inline-flex items-center justify-center gap-2 bg-[#fec05c] hover:bg-[#eeb14e] text-[#283e52] font-bold py-4 px-8 rounded-xl transition-all w-full shadow-lg shadow-[#fec05c]/20 hover:shadow-[#fec05c]/40 hover:-translate-y-1"
                             >
                                 Solicitar Este Crédito <ChevronRight className="w-5 h-5" />
