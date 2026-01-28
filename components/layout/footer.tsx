@@ -42,6 +42,7 @@ export function Footer() {
                         <ul className="space-y-2">
                             <li><Link href="/documents/terminos-y-condiciones.pdf" className="hover:text-secondary transition-colors" target="_blank" rel="noopener noreferrer">Términos y Condiciones</Link></li>
                             <li><Link href="/documents/politica-tratamiento-datos.pdf" className="hover:text-secondary transition-colors" target="_blank" rel="noopener noreferrer">Política de Tratamiento de Datos</Link></li>
+                            <li><Link href="/documents/aviso_de_privacidad.pdf" className="hover:text-secondary transition-colors" target="_blank" rel="noopener noreferrer">Aviso de Privacidad</Link></li>
                             <li><Link href="/tasas-y-tarifas" className="hover:text-secondary transition-colors">Tasas y Tarifas</Link></li>
                         </ul>
                         <div className="mt-6 flex gap-4">
