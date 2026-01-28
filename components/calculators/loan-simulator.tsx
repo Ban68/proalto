@@ -83,13 +83,16 @@ export function LoanSimulator() {
                                 <span className="flex items-center gap-2"><DollarSign className="w-4 h-4 text-[#fec05c]" /> Monto a Solicitar</span>
                                 <div className="relative">
                                     <input
-                                        type="number"
-                                        min="500000"
-                                        max="20000000"
-                                        step="100000"
-                                        value={amount}
-                                        onChange={(e) => setAmount(Number(e.target.value))}
-                                        className="text-2xl font-bold text-[#283e52] text-right w-48 border-b-2 border-gray-200 focus:border-[#fec05c] outline-none transition-colors bg-transparent p-1"
+                                        type="text"
+                                        value={formatCurrency(amount)}
+                                        onChange={(e) => {
+                                            const value = e.target.value.replace(/\D/g, '');
+                                            const numberValue = Number(value);
+                                            if (numberValue <= 20000000) {
+                                                setAmount(numberValue);
+                                            }
+                                        }}
+                                        className="text-2xl font-bold text-[#283e52] text-right w-56 border-b-2 border-gray-200 focus:border-[#fec05c] outline-none transition-colors bg-transparent p-1"
                                     />
                                 </div>
                             </label>
