@@ -20,6 +20,9 @@ export function Navbar() {
             }
         };
 
+        // Check initial scroll position
+        handleScroll();
+
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
