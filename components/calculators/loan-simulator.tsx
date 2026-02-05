@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Calculator, DollarSign, Calendar, Info, ChevronRight, RefreshCw } from "lucide-react";
+import { Calculator, DollarSign, Calendar, Info, ChevronRight, RefreshCw, FileText, Table as TableIcon } from "lucide-react";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 import { cn } from "@/lib/utils";
 
 const RATE_EA = 0.2436; // 24.36% E.A.
@@ -13,6 +15,8 @@ export function LoanSimulator() {
     const [amount, setAmount] = useState<number>(1000000);
     const [term, setTerm] = useState<number>(12);
     const [breakdown, setBreakdown] = useState<any>(null);
+    const [amortizationSchedule, setAmortizationSchedule] = useState<any[]>([]);
+    const [showTable, setShowTable] = useState(false);
 
     // Format currency
     const formatCurrency = (value: number) => {
@@ -49,6 +53,31 @@ export function LoanSimulator() {
         // Total Monthly Payment
         const totalMonthlyPayment = baseInstallment + riskFundMonthly + signatureMonthly + insuranceMonthly;
 
+        const schedule = [];
+        let currentBalance = amount;
+
+        for (let i = 1; i <= term; i++) {
+            const interest = currentBalance * monthlyRate;
+            const capital = baseInstallment - interest;
+            const totalPayment = baseInstallment + riskFundMonthly + signatureMonthly + insuranceMonthly;
+
+            currentBalance -= capital;
+            if (currentBalance < 0) currentBalance = 0;
+
+            schedule.push({
+                period: i,
+                initialBalance: currentBalance + capital,
+                payment: baseInstallment,
+                interest: interest,
+                capital: capital,
+                riskFund: riskFundMonthly,
+                signature: signatureMonthly,
+                insurance: insuranceMonthly,
+                totalPayment: totalPayment,
+                finalBalance: currentBalance
+            });
+        }
+
         setBreakdown({
             monthlyRate: (monthlyRate * 100).toFixed(2),
             baseInstallment,
@@ -57,6 +86,50 @@ export function LoanSimulator() {
             insuranceMonthly,
             totalMonthlyPayment
         });
+        setAmortizationSchedule(schedule);
+    };
+
+    const downloadPDF = () => {
+        const doc = new jsPDF();
+
+        // Header
+        doc.setFontSize(20);
+        doc.setTextColor(40, 62, 82); // #283e52
+        doc.text("Simulación de Crédito", 14, 22);
+
+        doc.setFontSize(10);
+        doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 14, 30);
+
+        // Summary
+        doc.setFontSize(12);
+        doc.text("Resumen del Crédito:", 14, 40);
+        doc.setFontSize(10);
+        doc.text(`Monto Solicitado: ${formatCurrency(amount)}`, 14, 48);
+        doc.text(`Plazo: ${term} Meses`, 14, 54);
+        doc.text(`Cuota Mensual Aprox.: ${formatCurrency(breakdown?.totalMonthlyPayment || 0)}`, 14, 60);
+
+        // Table
+        const tableColumn = ["No.", "Cuota Fija", "Interés", "Abono Capital", "Costos Adic.", "Total Pagado", "Saldo Final"];
+        const tableRows = amortizationSchedule.map(row => [
+            row.period,
+            formatCurrency(row.payment),
+            formatCurrency(row.interest),
+            formatCurrency(row.capital),
+            formatCurrency(row.riskFund + row.signature + row.insurance),
+            formatCurrency(row.totalPayment),
+            formatCurrency(row.finalBalance)
+        ]);
+
+        autoTable(doc, {
+            head: [tableColumn],
+            body: tableRows,
+            startY: 70,
+            theme: 'grid',
+            headStyles: { fillColor: [40, 62, 82] },
+            styles: { fontSize: 8 }
+        });
+
+        doc.save("simulacion-credito-proalto.pdf");
     };
 
     useEffect(() => {
@@ -182,6 +255,67 @@ export function LoanSimulator() {
                     </div>
                 </div>
             </div>
-        </section>
+
+            {/* Actions & Table */}
+            <div className="mt-8">
+                <div className="flex flex-col md:flex-row justify-center gap-4 mb-8">
+                    <button
+                        onClick={() => setShowTable(!showTable)}
+                        className="flex items-center justify-center gap-2 px-6 py-3 bg-white border border-gray-200 text-[#283e52] font-bold rounded-xl shadow-sm hover:bg-gray-50 transition-colors"
+                    >
+                        <TableIcon className="w-5 h-5 text-[#fec05c]" />
+                        {showTable ? "Ocultar Tabla de Amortización" : "Ver Tabla de Amortización"}
+                    </button>
+
+                    <button
+                        onClick={downloadPDF}
+                        className="flex items-center justify-center gap-2 px-6 py-3 bg-[#283e52] text-white font-bold rounded-xl shadow-lg shadow-[#283e52]/20 hover:bg-[#1f3040] transition-colors"
+                    >
+                        <FileText className="w-5 h-5" />
+                        Descargar PDF
+                    </button>
+                </div>
+
+                {showTable && (
+                    <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden overflow-x-auto">
+                        <div className="p-6 md:p-8">
+                            <h3 className="text-xl font-bold text-[#283e52] mb-6">Tabla de Amortización Estimada</h3>
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-sm text-left min-w-[800px]">
+                                    <thead className="bg-gray-50 text-[#283e52]">
+                                        <tr>
+                                            <th className="px-4 py-3 rounded-l-lg">No.</th>
+                                            <th className="px-4 py-3">Saldo Inicial</th>
+                                            <th className="px-4 py-3">Cuota Fija</th>
+                                            <th className="px-4 py-3">Interés</th>
+                                            <th className="px-4 py-3">Abono Capital</th>
+                                            <th className="px-4 py-3">Costos Adic.</th>
+                                            <th className="px-4 py-3">Total Pagado</th>
+                                            <th className="px-4 py-3 rounded-r-lg">Saldo Final</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-100">
+                                        {amortizationSchedule.map((row) => (
+                                            <tr key={row.period} className="hover:bg-gray-50/50">
+                                                <td className="px-4 py-3 font-semibold text-[#283e52]">{row.period}</td>
+                                                <td className="px-4 py-3 text-gray-600">{formatCurrency(row.initialBalance)}</td>
+                                                <td className="px-4 py-3 text-gray-600">{formatCurrency(row.payment)}</td>
+                                                <td className="px-4 py-3 text-gray-600">{formatCurrency(row.interest)}</td>
+                                                <td className="px-4 py-3 text-gray-600">{formatCurrency(row.capital)}</td>
+                                                <td className="px-4 py-3 text-gray-600">{formatCurrency(row.riskFund + row.signature + row.insurance)}</td>
+                                                <td className="px-4 py-3 font-bold text-[#283e52]">{formatCurrency(row.totalPayment)}</td>
+                                                <td className="px-4 py-3 text-gray-600">{formatCurrency(row.finalBalance)}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p className="text-xs text-gray-400 mt-4">* Los valores pueden variar levemente por redondeos. Esta tabla es una simulación y no constituye una oferta formal.</p>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+        </section >
     );
 }
