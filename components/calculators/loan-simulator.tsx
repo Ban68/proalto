@@ -109,10 +109,10 @@ export function LoanSimulator() {
         doc.text(`Cuota Mensual Aprox.: ${formatCurrency(breakdown?.totalMonthlyPayment || 0)}`, 14, 60);
 
         // Table
-        const tableColumn = ["No.", "Cuota Fija", "Interés", "Abono Capital", "Costos Adic.", "Total Pagado", "Saldo Final"];
+        const tableColumn = ["No.", "Saldo Inicial", "Interés", "Abono Capital", "Costos Adic.", "Total a pagar", "Saldo Final"];
         const tableRows = amortizationSchedule.map(row => [
             row.period,
-            formatCurrency(row.payment),
+            formatCurrency(row.initialBalance), // Swapped payment with initialBalance to match new order
             formatCurrency(row.interest),
             formatCurrency(row.capital),
             formatCurrency(row.riskFund + row.signature + row.insurance),
@@ -285,11 +285,10 @@ export function LoanSimulator() {
                                             <tr>
                                                 <th className="px-4 py-3 rounded-l-lg">No.</th>
                                                 <th className="px-4 py-3">Saldo Inicial</th>
-                                                <th className="px-4 py-3">Cuota Fija</th>
                                                 <th className="px-4 py-3">Interés</th>
                                                 <th className="px-4 py-3">Abono Capital</th>
                                                 <th className="px-4 py-3">Costos Adic.</th>
-                                                <th className="px-4 py-3">Total Pagado</th>
+                                                <th className="px-4 py-3">Total a pagar</th>
                                                 <th className="px-4 py-3 rounded-r-lg">Saldo Final</th>
                                             </tr>
                                         </thead>
@@ -298,7 +297,6 @@ export function LoanSimulator() {
                                                 <tr key={row.period} className="hover:bg-gray-50/50">
                                                     <td className="px-4 py-3 font-semibold text-[#283e52]">{row.period}</td>
                                                     <td className="px-4 py-3 text-gray-600">{formatCurrency(row.initialBalance)}</td>
-                                                    <td className="px-4 py-3 text-gray-600">{formatCurrency(row.payment)}</td>
                                                     <td className="px-4 py-3 text-gray-600">{formatCurrency(row.interest)}</td>
                                                     <td className="px-4 py-3 text-gray-600">{formatCurrency(row.capital)}</td>
                                                     <td className="px-4 py-3 text-gray-600">{formatCurrency(row.riskFund + row.signature + row.insurance)}</td>
