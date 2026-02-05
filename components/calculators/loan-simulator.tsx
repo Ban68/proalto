@@ -280,7 +280,7 @@ export function LoanSimulator() {
                             <div className="p-6 md:p-8">
                                 <h3 className="text-xl font-bold text-[#283e52] mb-6">Tabla de Amortización Estimada</h3>
                                 <div className="overflow-x-auto">
-                                    <table className="w-full text-sm text-left min-w-[800px]">
+                                    <table className="w-full text-sm text-center min-w-[800px]">
                                         <thead className="bg-gray-50 text-[#283e52]">
                                             <tr>
                                                 <th className="px-4 py-3 rounded-l-lg">No.</th>
