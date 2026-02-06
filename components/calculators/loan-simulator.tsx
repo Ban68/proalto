@@ -126,7 +126,7 @@ export function LoanSimulator() {
             startY: 70,
             theme: 'grid',
             headStyles: { fillColor: [40, 62, 82] },
-            styles: { fontSize: 8 }
+            styles: { fontSize: 8, halign: 'center' }
         });
 
         doc.save("simulacion-credito-proalto.pdf");
