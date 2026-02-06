@@ -6,7 +6,7 @@ import { prisma } from '@/lib/prisma';
 const tools = {
     checkApplicationStatus: tool({
         description: 'Check the status of a credit application by Cedula',
-        parameters: z.object({
+        inputSchema: z.object({
             cedula: z.string().describe('The national identification number (Cedula) of the customer'),
         }),
         execute: async (args) => {
