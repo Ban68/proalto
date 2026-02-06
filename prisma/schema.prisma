@@ -3,41 +3,34 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_PRISMA_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model CreditApplication {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  name      String
-  
-  identificationType String @default("CC") // CC, NIT
-  cedula    String
-  birthDate DateTime? // Optional because initial migration might fail if I make it required without default, but for new app it's fine. I'll make it required but I need to handle the migration. Actually, for a clean dev flow, I can reset or just add it. Since I have no critical data, I'll make them optional or default? No, they are required in form. I'll make them optional in DB to avoid migration issues with existing rows, OR just handle it. Given this is a dev env with likely test data, I can clear it or default it. I'll stick to making them optional (?) No, better to correct the model. I will make them `String?` for now to be safe, or just `String`. I'll make them `String?` (optional) in DB to be safe with existing data, but required in Form.
-  
-  email     String
-  phone     String
-  address   String?
-  department String?
-  city      String?
-  
-  company   String? // Nombre de empresa
-  purpose   String? // Propósito
-  employmentType String? // Tipo de trabajo
-  monthlyIncome Decimal?
-  
-  amount    Decimal
-  term      Int
-  
-  digitalService Boolean @default(false)
-  
-  status    ApplicationStatus @default(PENDING)
-  notes     String?
-  documents Json? // Array of { name: string, url: string }
+  id                 String            @id @default(cuid())
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  name               String
+  identificationType String            @default("CC")
+  cedula             String
+  birthDate          DateTime?
+  email              String
+  phone              String
+  address            String?
+  department         String?
+  city               String?
+  company            String?
+  purpose            String?
+  employmentType     String?
+  monthlyIncome      Decimal?
+  amount             Decimal
+  term               Int
+  digitalService     Boolean           @default(false)
+  status             ApplicationStatus @default(PENDING)
+  notes              String?
+  documents          Json?
 }
 
 enum ApplicationStatus {

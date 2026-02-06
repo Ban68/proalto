@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { FloatingWhatsApp } from "@/components/ui/floating-whatsapp";
+import { ChatWidget } from "@/components/ui/chat-widget";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -34,6 +35,7 @@ export default function RootLayout({
       >
         {children}
         <FloatingWhatsApp />
+        <ChatWidget />
       </body>
     </html >
   );

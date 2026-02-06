@@ -10,8 +10,11 @@
     "postinstall": "npx prisma generate"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.21",
+    "@ai-sdk/react": "^3.0.76",
     "@react-email/components": "^1.0.6",
     "@supabase/supabase-js": "^2.91.1",
+    "ai": "^6.0.73",
     "clsx": "^2.1.1",
     "framer-motion": "^12.26.2",
     "jspdf": "^4.1.0",
