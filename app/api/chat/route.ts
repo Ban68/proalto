@@ -3,6 +3,10 @@ import { streamText, tool } from 'ai';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma'; // Assuming lib/prisma exists? I need to check. If not, I'll use standard import.
 
+const checkStatusSchema = z.object({
+    cedula: z.string().describe('The national identification number (Cedula) of the customer'),
+});
+
 export async function POST(req: Request) {
     const { messages } = await req.json();
 
@@ -20,10 +24,8 @@ export async function POST(req: Request) {
         tools: {
             checkApplicationStatus: tool({
                 description: 'Check the status of a credit application by Cedula',
-                parameters: z.object({
-                    cedula: z.string().describe('The national identification number (Cedula) of the customer'),
-                }),
-                execute: async ({ cedula }: { cedula: string }) => {
+                parameters: checkStatusSchema,
+                execute: async ({ cedula }: z.infer<typeof checkStatusSchema>) => {
                     try {
                         const application = await prisma.creditApplication.findFirst({
                             where: { cedula: cedula },
@@ -38,7 +40,8 @@ export async function POST(req: Request) {
                     } catch (error) {
                         return "Hubo un error al consultar la base de datos.";
                     } finally {
-                        await prisma.$disconnect();
+                        // prisma disconnect is handled by singleton usually, or not needed in serverless generally as connection reuse is preferred
+                        // await prisma.$disconnect(); 
                     }
                 },
             }),
