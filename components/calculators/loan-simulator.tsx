@@ -1,22 +1,39 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Calculator, DollarSign, Calendar, Info, ChevronRight, RefreshCw, FileText, Table as TableIcon } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { Calculator, DollarSign, Calendar, Info, ChevronRight, RefreshCw, FileText, Table as TableIcon, Settings, Lock } from "lucide-react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { cn } from "@/lib/utils";
 
-const RATE_EA = 0.2436; // 24.36% E.A.
-const RISK_FUND_PCT = 0.10; // 10%
-const SIGNATURE_COST = 20000; // $20,000 fixed
-const INSURANCE_PCT = 0.004; // 0.4%
+// Default constants
+const DEFAULT_RATE_EA = 0.2436; // 24.36% E.A.
+const DEFAULT_RISK_FUND_PCT = 0.10; // 10%
+const DEFAULT_SIGNATURE_COST = 20000; // $20,000 fixed
+const DEFAULT_INSURANCE_PCT = 0.004; // 0.4%
 
 export function LoanSimulator() {
+    const searchParams = useSearchParams();
+    const isAdmin = searchParams.get('admin') === 'true';
+
+    // State for Simulation Parameters (Admin Configurable)
+    const [rateEA, setRateEA] = useState<number>(DEFAULT_RATE_EA);
+    const [riskFundPct, setRiskFundPct] = useState<number>(DEFAULT_RISK_FUND_PCT);
+    const [signatureCost, setSignatureCost] = useState<number>(DEFAULT_SIGNATURE_COST);
+    const [insurancePct, setInsurancePct] = useState<number>(DEFAULT_INSURANCE_PCT);
+
+    // State for User Input
     const [amount, setAmount] = useState<number>(1000000);
     const [term, setTerm] = useState<number>(12);
     const [breakdown, setBreakdown] = useState<any>(null);
     const [amortizationSchedule, setAmortizationSchedule] = useState<any[]>([]);
     const [showTable, setShowTable] = useState(false);
+    const [showAdminPanel, setShowAdminPanel] = useState(false);
+
+    useEffect(() => {
+        if (isAdmin) setShowAdminPanel(true);
+    }, [isAdmin]);
 
     // Format currency
     const formatCurrency = (value: number) => {
@@ -32,7 +49,7 @@ export function LoanSimulator() {
 
         // 1. Monthly Rate Calculation
         // Formula: (1 + EA)^(1/12) - 1
-        const monthlyRate = Math.pow(1 + RATE_EA, 1 / 12) - 1;
+        const monthlyRate = Math.pow(1 + rateEA, 1 / 12) - 1;
 
         // 2. Base Monthly Installment (Amortization)
         // Formula: P * (r * (1+r)^n) / ((1+r)^n - 1)
@@ -41,14 +58,14 @@ export function LoanSimulator() {
         // 3. Additional Costs (Monthly portions)
 
         // Fondo de Riesgo (10% of Amount / Term)
-        const riskFundTotal = amount * RISK_FUND_PCT;
+        const riskFundTotal = amount * riskFundPct;
         const riskFundMonthly = riskFundTotal / term;
 
         // Firma Electrónica ($20,000 / Term)
-        const signatureMonthly = SIGNATURE_COST / term;
+        const signatureMonthly = signatureCost / term;
 
         // Seguro de Vida (0.4% of Amount - FIXED based on initial capital as per request)
-        const insuranceMonthly = amount * INSURANCE_PCT;
+        const insuranceMonthly = amount * insurancePct;
 
         // Total Monthly Payment
         const totalMonthlyPayment = baseInstallment + riskFundMonthly + signatureMonthly + insuranceMonthly;
@@ -134,7 +151,7 @@ export function LoanSimulator() {
 
     useEffect(() => {
         calculateLoan();
-    }, [amount, term]);
+    }, [amount, term, rateEA, riskFundPct, signatureCost, insurancePct]);
 
     return (
         <section className="py-16 bg-white" id="simulador">
@@ -146,6 +163,62 @@ export function LoanSimulator() {
                     <h2 className="text-3xl font-bold text-[#283e52]">Simulador de Crédito</h2>
                     <p className="text-gray-500 mt-2">Calcula tu cuota mensual aproximada incluyendo todos los costos.</p>
                 </div>
+
+                {/* Admin Panel */}
+                {showAdminPanel && (
+                    <div className="mb-8 bg-red-50 border-2 border-red-200 rounded-2xl p-6 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-bl-xl border-l border-b border-red-200">
+                            MODO ADMINISTRADOR ACTIVO
+                        </div>
+                        <h3 className="flex items-center gap-2 text-red-800 font-bold mb-4">
+                            <Settings className="w-5 h-5" /> Configuración de Parámetros
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div>
+                                <label className="block text-xs font-bold text-red-700 mb-1">Tasa E.A. (Decimal)</label>
+                                <input
+                                    type="number"
+                                    step="0.0001"
+                                    value={rateEA}
+                                    onChange={(e) => setRateEA(Number(e.target.value))}
+                                    className="w-full p-2 border border-red-200 rounded-lg text-sm bg-white"
+                                />
+                                <span className="text-xs text-red-500">{(rateEA * 100).toFixed(2)}%</span>
+                            </div>
+                            <div>
+                                <label className="block text-xs font-bold text-red-700 mb-1">Fondo Riesgo (Decimal)</label>
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    value={riskFundPct}
+                                    onChange={(e) => setRiskFundPct(Number(e.target.value))}
+                                    className="w-full p-2 border border-red-200 rounded-lg text-sm bg-white"
+                                />
+                                <span className="text-xs text-red-500">{(riskFundPct * 100).toFixed(1)}%</span>
+                            </div>
+                            <div>
+                                <label className="block text-xs font-bold text-red-700 mb-1">Costo Firma ($)</label>
+                                <input
+                                    type="number"
+                                    value={signatureCost}
+                                    onChange={(e) => setSignatureCost(Number(e.target.value))}
+                                    className="w-full p-2 border border-red-200 rounded-lg text-sm bg-white"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs font-bold text-red-700 mb-1">Seguro (Decimal)</label>
+                                <input
+                                    type="number"
+                                    step="0.0001"
+                                    value={insurancePct}
+                                    onChange={(e) => setInsurancePct(Number(e.target.value))}
+                                    className="w-full p-2 border border-red-200 rounded-lg text-sm bg-white"
+                                />
+                                <span className="text-xs text-red-500">{(insurancePct * 100).toFixed(2)}%</span>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 <div className="grid lg:grid-cols-12 gap-8 bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
 
