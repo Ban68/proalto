@@ -23,7 +23,7 @@ export async function POST(req: Request) {
                 parameters: z.object({
                     cedula: z.string().describe('The national identification number (Cedula) of the customer'),
                 }),
-                execute: async ({ cedula }) => {
+                execute: async ({ cedula }: { cedula: string }) => {
                     try {
                         const application = await prisma.creditApplication.findFirst({
                             where: { cedula: cedula },
