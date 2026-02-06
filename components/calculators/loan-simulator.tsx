@@ -150,7 +150,7 @@ export function LoanSimulator() {
                 <div className="grid lg:grid-cols-12 gap-8 bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
 
                     {/* Controls Section */}
-                    <div className="lg:col-span-7 p-8 md:p-10 space-y-8">
+                    <div className="lg:col-span-6 p-8 md:p-10 space-y-8">
                         <div>
                             <label className="block text-sm font-bold text-[#283e52] mb-4 flex items-center justify-between">
                                 <span className="flex items-center gap-2"><DollarSign className="w-4 h-4 text-[#fec05c]" /> Monto a Solicitar</span>
@@ -231,7 +231,7 @@ export function LoanSimulator() {
                     </div>
 
                     {/* Result Section */}
-                    <div className="lg:col-span-5 bg-[#283e52] p-8 md:p-10 flex flex-col justify-center text-white relative overflow-hidden">
+                    <div className="lg:col-span-6 bg-[#283e52] p-8 md:p-10 flex flex-col justify-center text-white relative overflow-hidden">
                         {/* Background decoration */}
                         <div className="absolute top-0 right-0 w-64 h-64 bg-[#fec05c]/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
                         <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#fff]/5 rounded-full blur-2xl -ml-10 -mb-10"></div>
