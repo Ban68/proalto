@@ -161,7 +161,7 @@ export function LoanSimulator() {
                                         onChange={(e) => {
                                             const value = e.target.value.replace(/\D/g, '');
                                             const numberValue = Number(value);
-                                            if (numberValue <= 20000000) {
+                                            if (numberValue <= 100000000) {
                                                 setAmount(numberValue);
                                             }
                                         }}
@@ -172,7 +172,7 @@ export function LoanSimulator() {
                             <input
                                 type="range"
                                 min="500000"
-                                max="20000000"
+                                max="100000000"
                                 step="100000"
                                 value={amount}
                                 onChange={(e) => setAmount(Number(e.target.value))}
@@ -180,7 +180,7 @@ export function LoanSimulator() {
                             />
                             <div className="flex justify-between text-xs text-gray-400 mt-2 font-medium">
                                 <span>$500.000</span>
-                                <span>$20.000.000</span>
+                                <span>$100.000.000</span>
                             </div>
                         </div>
 
@@ -192,7 +192,7 @@ export function LoanSimulator() {
                             <input
                                 type="range"
                                 min="6"
-                                max="36"
+                                max="60"
                                 step="1"
                                 value={term}
                                 onChange={(e) => setTerm(Number(e.target.value))}
@@ -200,7 +200,7 @@ export function LoanSimulator() {
                             />
                             <div className="flex justify-between text-xs text-gray-400 mt-2 font-medium">
                                 <span>6 Meses</span>
-                                <span>36 Meses</span>
+                                <span>60 Meses</span>
                             </div>
                         </div>
 
