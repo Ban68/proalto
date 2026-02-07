@@ -8,7 +8,8 @@ import { cn } from "@/lib/utils";
 
 export function ChatWidget() {
     const [isOpen, setIsOpen] = useState(false);
-    const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+    const [input, setInput] = useState("");
+    const { messages, sendMessage, isLoading } = useChat({
         api: "/api/chat",
     });
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -18,6 +19,17 @@ export function ChatWidget() {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
     }, [messages]);
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInput(e.target.value);
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!input.trim()) return;
+        await sendMessage({ role: 'user', content: input });
+        setInput("");
+    };
 
     const toggleChat = () => setIsOpen(!isOpen);
 
