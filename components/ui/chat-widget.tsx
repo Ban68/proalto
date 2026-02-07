@@ -29,7 +29,7 @@ export function ChatWidget() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!input.trim()) return;
-        await sendMessage({ role: 'user', content: input });
+        await sendMessage({ text: input });
         setInput("");
     };
 
