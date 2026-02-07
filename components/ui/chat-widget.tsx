@@ -9,9 +9,10 @@ import { cn } from "@/lib/utils";
 export function ChatWidget() {
     const [isOpen, setIsOpen] = useState(false);
     const [input, setInput] = useState("");
-    const { messages, sendMessage, isLoading } = useChat({
+    const { messages, sendMessage, status } = useChat({
         api: "/api/chat",
     });
+    const isLoading = status === 'submitted' || status === 'streaming';
     const scrollRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
